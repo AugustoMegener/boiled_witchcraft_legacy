@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "boiled_witchcraft:block/magic_fire_base"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " s",
+    "c "
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "c": {
+      "item": "minecraft:coal"
+    }
+  },
+  "result": {
+    "item": "boiled_witchcraft:pencil",
+    "count": 1
+  }
+}

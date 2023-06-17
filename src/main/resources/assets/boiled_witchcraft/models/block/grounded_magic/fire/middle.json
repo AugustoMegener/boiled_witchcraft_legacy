@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "render_type": "cutout",
+  "textures": {
+    "all": "boiled_witchcraft:block/magic_fire_middle"
+  }
+}

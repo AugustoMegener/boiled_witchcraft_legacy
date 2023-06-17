@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "glyph=0": { "model": "boiled_witchcraft:block/glyph/fire" },
+    "glyph=1": { "model": "boiled_witchcraft:block/glyph/ice" }
+  }
+}
