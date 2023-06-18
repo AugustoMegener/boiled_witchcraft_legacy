@@ -19,6 +19,8 @@ import org.slf4j.Logger;
 
 import static org.kitowashere.boiled_witchcraft.blocks.Registry.BLOCKS;
 import static org.kitowashere.boiled_witchcraft.items.Registry.ITEMS;
+import static org.kitowashere.boiled_witchcraft.entities.Registry.ENTITIES;
+
 import static org.kitowashere.boiled_witchcraft.items.Registry.PENCIL;
 
 @Mod(BoiledWitchcraft.MODID)
@@ -33,6 +35,7 @@ public class BoiledWitchcraft {
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
+        ENTITIES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

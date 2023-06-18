@@ -22,7 +22,7 @@ public class Pencil extends Item {
     }
 
     @Override
-    public @NotNull InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         ItemStack item = context.getItemInHand();
         
         CompoundTag nbt = item.getOrCreateTag();
@@ -64,9 +64,15 @@ public class Pencil extends Item {
 
                 level.setBlock(pos, glyphBlock, 0);
 
+                context.getPlayer().getCooldowns().addCooldown(context.getItemInHand().getItem(), 40);
+
                 if (context.getPlayer() instanceof ServerPlayer) {
                     ItemStack item = context.getItemInHand();
                     item.hurt(1, level.random, context.getPlayer().getServer().getPlayerList().getPlayer(context.getPlayer().getUUID()));
+
+                    if(item.getDamageValue() >= 100) {
+                        context.getPlayer().getInventory().removeItem(item);
+                    }
                 }
             }
         }

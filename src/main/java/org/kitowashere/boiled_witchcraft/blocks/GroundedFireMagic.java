@@ -32,7 +32,8 @@ public class GroundedFireMagic extends BaseFireBlock {
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.moveRelative(1.0F, new Vec3(0.0F, 1.0F, 0.0F));
+        entity.setRemainingFireTicks(1200);
+        entity.moveRelative(0.5F, new Vec3(0.0F, 0.5F, 0.0F));
 
         super.entityInside(state, level, pos, entity);
     }
