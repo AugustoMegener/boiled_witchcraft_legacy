@@ -46,6 +46,8 @@ public class Pencil extends Item {
 
             context.getPlayer().displayClientMessage(Component.translatable(MODID + ".pencil.message." + next_glyph, true), true);
         } else {
+            nbt = item.getOrCreateTag();
+
             DrawnGlyph(context, nbt.getInt("glyph"));
         }
 
@@ -58,8 +60,7 @@ public class Pencil extends Item {
 
         if(level.isEmptyBlock(pos)) {
             if(level.getBlockState(context.getClickedPos()).isSolidRender(level, context.getClickedPos())) {
-                BlockState glyphBlock = GLYPH.get().defaultBlockState();
-                glyphBlock.setValue(Glyph.GLYPH, glyphNum);
+                BlockState glyphBlock = GLYPH.get().defaultBlockState().setValue(Glyph.GLYPH, glyphNum);
 
                 level.setBlock(pos, glyphBlock, 0);
 

@@ -1,8 +1,11 @@
 {
   "item.boiled_witchcraft.pencil": "Pencil",
-  "boiled_witchcraft.pencil.message.fire": "Fire glyph",
-  "boiled_witchcraft.pencil.message.ice": "Ice glyph",
 
-  "block.boiled_witchcraft.glyph": "Fire Glyph",
-  "block.boiled_witchcraft.grounded_fire_magic": "Fire Magic"
+  "boiled_witchcraft.pencil.message.0": "Fire glyph",
+  "boiled_witchcraft.pencil.message.1": "Ice glyph",
+
+  "block.boiled_witchcraft.glyph": "Glyph",
+
+  "block.boiled_witchcraft.grounded_fire_magic": "Fire Magic",
+  "block.boiled_witchcraft.grounded_ice_magic": "Ice Magic"
 }

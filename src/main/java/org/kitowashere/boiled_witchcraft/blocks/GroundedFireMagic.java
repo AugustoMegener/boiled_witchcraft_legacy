@@ -32,7 +32,7 @@ public class GroundedFireMagic extends BaseFireBlock {
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.moveRelative(1.0F, new Vec3(0.0F, 3.0F, 0.0F));
+        entity.moveRelative(1.0F, new Vec3(0.0F, 1.0F, 0.0F));
 
         super.entityInside(state, level, pos, entity);
     }
@@ -44,7 +44,7 @@ public class GroundedFireMagic extends BaseFireBlock {
 
     @Override
     public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        return  Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.00D, 16.0D);
+        return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.00D, 16.0D);
     }
 
     @Override
