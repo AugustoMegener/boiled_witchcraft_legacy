@@ -10,11 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 import org.kitowashere.boiled_witchcraft.blocks.Glyph;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
-import static org.kitowashere.boiled_witchcraft.blocks.Registry.GLYPH;
+import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH;
 
 public class Pencil extends Item {
     public Pencil() {
@@ -37,7 +36,7 @@ public class Pencil extends Item {
         if(context.getPlayer().isShiftKeyDown()){
             Integer next_glyph = nbt.getInt("glyph");
 
-            if(next_glyph==1) next_glyph = 0;
+            if(next_glyph==2) next_glyph = 0;
             else next_glyph++;
 
 

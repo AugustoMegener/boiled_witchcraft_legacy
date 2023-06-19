@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.Material;
 
 public class GroundedIceMagic extends Block {
     public GroundedIceMagic() {
-        super(Properties.of(Material.FIRE).explosionResistance(-1).requiresCorrectToolForDrops().strength(10));
+        super(Properties.of(Material.ICE_SOLID).explosionResistance(-1).requiresCorrectToolForDrops().strength(10));
     }
 
     @Override
