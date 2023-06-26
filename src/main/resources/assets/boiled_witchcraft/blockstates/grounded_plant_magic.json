@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "level=0": { "model": "boiled_witchcraft:block/grounded_magic/plant/bottom" },
+    "level=1": { "model": "boiled_witchcraft:block/grounded_magic/plant/middle" },
+    "level=2": { "model": "boiled_witchcraft:block/grounded_magic/plant/top" }
+  }
+}

@@ -36,7 +36,7 @@ public class Pencil extends Item {
         if(context.getPlayer().isShiftKeyDown()){
             Integer next_glyph = nbt.getInt("glyph");
 
-            if(next_glyph==2) next_glyph = 0;
+            if(next_glyph==3) next_glyph = 0;
             else next_glyph++;
 
 
