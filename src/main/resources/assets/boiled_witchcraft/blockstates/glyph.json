@@ -1,8 +1,8 @@
 {
   "variants": {
-    "glyph=0": { "model": "boiled_witchcraft:block/glyph/fire" },
-    "glyph=1": { "model": "boiled_witchcraft:block/glyph/ice" },
-    "glyph=2": { "model": "boiled_witchcraft:block/glyph/light" },
-    "glyph=3": { "model": "boiled_witchcraft:block/glyph/plant" }
+    "glyph=fire": { "model": "boiled_witchcraft:block/glyph/fire" },
+    "glyph=ice": { "model": "boiled_witchcraft:block/glyph/ice" },
+    "glyph=light": { "model": "boiled_witchcraft:block/glyph/light" },
+    "glyph=plant": { "model": "boiled_witchcraft:block/glyph/plant" }
   }
 }

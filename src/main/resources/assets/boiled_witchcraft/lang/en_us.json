@@ -1,5 +1,6 @@
 {
   "item.boiled_witchcraft.pencil": "Pencil",
+  "item.boiled_witchcraft.glyph_paper": "Glyph On a Paper",
 
   "boiled_witchcraft.pencil.message.0": "Fire glyph",
   "boiled_witchcraft.pencil.message.1": "Ice glyph",
@@ -7,7 +8,6 @@
   "boiled_witchcraft.pencil.message.3": "Plant glyph",
 
   "block.boiled_witchcraft.glyph": "Glyph",
-
   "block.boiled_witchcraft.grounded_fire_magic": "Fire Magic",
   "block.boiled_witchcraft.grounded_ice_magic": "Ice Magic",
   "block.boiled_witchcraft.spark": "Spark"
