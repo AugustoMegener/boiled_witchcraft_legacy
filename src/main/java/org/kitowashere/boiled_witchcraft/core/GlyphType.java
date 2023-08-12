@@ -21,8 +21,4 @@ public enum GlyphType implements StringRepresentable {
     public String getSerializedName() { return NAME; }
 
     public void doMagic(Level level, BlockPos pos) { ACTION.execute(level, pos); }
-
-    public static void plant(Level level, BlockPos pos) {
-
-    }
 }
