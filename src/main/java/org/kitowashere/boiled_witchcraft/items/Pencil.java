@@ -10,19 +10,22 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import org.kitowashere.boiled_witchcraft.blocks.Glyph;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
+
+import java.util.List;
 
 import static net.minecraft.world.InteractionHand.MAIN_HAND;
 import static net.minecraft.world.InteractionHand.OFF_HAND;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH;
 
-public class Pencil extends Item {
+public class Pencil extends Item  {
     public Pencil() {
         super(new Properties().durability(100));
     }
@@ -36,6 +39,18 @@ public class Pencil extends Item {
             case OFF_HAND -> item = pPlayer.getItemInHand(MAIN_HAND);
         }
 
+        if (item.getItem().getDescriptionId().equals("item.minecraft.paper")) {
+            item.shrink(1);
+
+            CompoundTag nbt = new CompoundTag();
+            nbt.putString("glyph", GlyphType.values()[pPlayer.getItemInHand(pUsedHand).getTag().getInt("glyph")].getSerializedName());
+
+            ItemStack paper = new ItemStack(GlyphOnAPaper::new, 1);
+            paper.setTag(nbt);
+
+            pPlayer.getInventory().add(paper);
+        }
+
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 
@@ -46,7 +61,7 @@ public class Pencil extends Item {
         CompoundTag nbt = item.getOrCreateTag();
 
         if (nbt.isEmpty()) {
-            nbt.putInt("glyph", 0);
+            nbt.putString("glyph", "fire");
             item.setTag(nbt);
         }
 
@@ -56,10 +71,9 @@ public class Pencil extends Item {
 
             context.getPlayer().displayClientMessage(Component.translatable(MODID + ".pencil.message." + nbt.getInt("glyph"), true), true);
         } else {
-            GlyphType[] types = {GlyphType.FIRE, GlyphType.ICE, GlyphType.LIGHT, GlyphType.PLANT};
             nbt = item.getOrCreateTag();
 
-            DrawnGlyph(context, types[nbt.getInt("glyph")]);
+            DrawnGlyph(context, GlyphType.values()[nbt.getInt("glyph")]);
         }
 
         return super.useOn(context);
@@ -85,5 +99,13 @@ public class Pencil extends Item {
                 }
             }
         }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+
+        if (pTooltipComponents.isEmpty()) pTooltipComponents.add(Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("glyph")));
+        else pTooltipComponents.set(0, Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("glyph")));
     }
 }
