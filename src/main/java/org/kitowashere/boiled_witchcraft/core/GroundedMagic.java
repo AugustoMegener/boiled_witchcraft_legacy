@@ -15,7 +15,7 @@ public interface GroundedMagic {
 
         for (int i = 0; i < 3; i++) {
             BlockState magic = GFM.get().defaultBlockState().setValue(GroundedFireMagic.LEVEL, i);
-            level.setBlock(fireMagicBlocks[i], magic, 3);
+            level.setBlock(fireMagicBlocks[i], magic, 2);
         }
     }
     static void ice(Level level, BlockPos pos) {
@@ -23,12 +23,12 @@ public interface GroundedMagic {
 
         for (int i = 0; i < 3; i++) {
             BlockState magic = GIM.get().defaultBlockState();
-            level.setBlock(iceMagicBlocks[i], magic, 3);
+            level.setBlock(iceMagicBlocks[i], magic, 2);
         }
     }
 
     static void light(Level level, BlockPos pos) {
-        level.setBlock(pos.above(), SPARK.get().defaultBlockState(), 3);
+        level.setBlock(pos.above(), SPARK.get().defaultBlockState(), 2);
         level.removeBlock(pos, true);
     }
 
@@ -37,7 +37,7 @@ public interface GroundedMagic {
 
         for (int i = 0; i < 3; i++) {
             BlockState magic = GPM.get().defaultBlockState().setValue(GroundedFireMagic.LEVEL, i);
-            level.setBlock(plantMagicBlocks[i], magic, 3);
+            level.setBlock(plantMagicBlocks[i], magic, 2);
         }
     }
 }

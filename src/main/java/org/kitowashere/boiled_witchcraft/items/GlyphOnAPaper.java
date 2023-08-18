@@ -15,11 +15,13 @@ public class GlyphOnAPaper extends Item {
     public InteractionResult useOn(UseOnContext pContext) {
         ItemStack item = pContext.getItemInHand();
         Level level = pContext.getLevel();
-        BlockPos pos = pContext.getClickedPos().above();
+        BlockPos pos = pContext.getClickedPos();
 
-        if (level.getBlockState(pos).isSolidRender(level, pos) && pContext.getPlayer().isShiftKeyDown()) {
-            GlyphType.valueOf(item.getTag().getString("glyph")).doMagic(level, pos);
+        if (level.getBlockState(pos).isSolidRender(level, pos) && !pContext.getPlayer().isShiftKeyDown()) {
+            GlyphType.values()[item.getTag().getInt("glyph")].doMagic(level, pos.above());
+            pContext.getItemInHand().shrink(1);
         }
+
         return super.useOn(pContext);
     }
 }

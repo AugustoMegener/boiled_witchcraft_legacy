@@ -20,10 +20,10 @@ import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
 import java.util.List;
 
-import static net.minecraft.world.InteractionHand.MAIN_HAND;
-import static net.minecraft.world.InteractionHand.OFF_HAND;
+import static net.minecraft.world.InteractionHand.*;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH;
+import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.GLYPH_ON_A_PAPER;
 
 public class Pencil extends Item  {
     public Pencil() {
@@ -42,11 +42,8 @@ public class Pencil extends Item  {
         if (item.getItem().getDescriptionId().equals("item.minecraft.paper")) {
             item.shrink(1);
 
-            CompoundTag nbt = new CompoundTag();
-            nbt.putString("glyph", GlyphType.values()[pPlayer.getItemInHand(pUsedHand).getTag().getInt("glyph")].getSerializedName());
-
-            ItemStack paper = new ItemStack(GlyphOnAPaper::new, 1);
-            paper.setTag(nbt);
+            ItemStack paper = GLYPH_ON_A_PAPER.get().getDefaultInstance();
+            paper.setTag(pPlayer.getItemInHand(pUsedHand).getTag());
 
             pPlayer.getInventory().add(paper);
         }
@@ -105,7 +102,6 @@ public class Pencil extends Item  {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
-        if (pTooltipComponents.isEmpty()) pTooltipComponents.add(Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("glyph")));
-        else pTooltipComponents.set(0, Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("glyph")));
+        pTooltipComponents.add(1, Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("glyph")));
     }
 }
