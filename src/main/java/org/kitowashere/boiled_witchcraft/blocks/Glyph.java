@@ -17,7 +17,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
-public class Glyph extends Block /*DirectionalBlock*/ {
+import static net.minecraft.core.Direction.UP;
+
+public class Glyph extends Block {
     public static final EnumProperty<GlyphType> GLYPH = EnumProperty.create("glyph", GlyphType.class);
 
     public Glyph() {
@@ -26,27 +28,24 @@ public class Glyph extends Block /*DirectionalBlock*/ {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(GLYPH/*, FACING*/);
+        builder.add(GLYPH);
 
         super.createBlockStateDefinition(builder);
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(!player.isShiftKeyDown()) state.getValue(GLYPH).doMagic(level, pos);
+        if(!player.isShiftKeyDown()) state.getValue(GLYPH).doMagic(level, pos, UP);
 
         return InteractionResult.SUCCESS;
     }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        state.getValue(GLYPH).doMagic(level, pos);
+        state.getValue(GLYPH).doMagic(level, pos, UP);
 
         super.entityInside(state, level, pos, entity);
     }
-
-    /*@Override
-    public BlockState rotate(BlockState pState, Rotation pRot) { return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING))); }*/
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
