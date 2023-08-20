@@ -1,7 +1,7 @@
 {
   "variants": {
-    "level=0": { "model": "boiled_witchcraft:block/grounded_magic/fire/bottom" },
-    "level=1": { "model": "boiled_witchcraft:block/grounded_magic/fire/middle" },
-    "level=2": { "model": "boiled_witchcraft:block/grounded_magic/fire/top" }
+    "level=0": { "model": "boiled_witchcraft:block/surfaced_magic/fire/bottom" },
+    "level=1": { "model": "boiled_witchcraft:block/surfaced_magic/fire/middle" },
+    "level=2": { "model": "boiled_witchcraft:block/surfaced_magic/fire/top" }
   }
 }

@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "boiled_witchcraft:block/grounded_magic/ice/block" }
+    "": { "model": "boiled_witchcraft:block/surfaced_magic/ice/block" }
   }
 }

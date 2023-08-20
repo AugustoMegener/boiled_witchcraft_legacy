@@ -35,14 +35,14 @@ public class Glyph extends Block {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(!player.isShiftKeyDown()) state.getValue(GLYPH).doMagic(level, pos, UP);
+        if(!player.isShiftKeyDown()) state.getValue(GLYPH).doMagicInSurface(level, pos, UP);
 
         return InteractionResult.SUCCESS;
     }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        state.getValue(GLYPH).doMagic(level, pos, UP);
+        state.getValue(GLYPH).doMagicInSurface(level, pos, UP);
 
         super.entityInside(state, level, pos, entity);
     }
