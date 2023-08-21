@@ -19,7 +19,7 @@ public record GlyphType(String name, SurfacedMagic surfacedMagic, ThrowableMagic
         for (GlyphType glyph : registeredGlyphs) { if (glyph.name().equals(name)) { return glyph; } } return null;
     }
 
-    public static GlyphType fromIndex(int index) { return registeredGlyphs.get(index); }
+    public static GlyphType fromIndex(int index) { return index <= registeredGlyphs.size() ? registeredGlyphs.get(index) : null; }
 
     public static GlyphType register(String name, SurfacedMagic surfacedMagic, ThrowableMagic throwableMagic) {
         GlyphType glyph = new GlyphType(name, surfacedMagic, throwableMagic);

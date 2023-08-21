@@ -30,7 +30,10 @@ public class GlyphOnAPaper extends Item {
 
         if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
 
-            GlyphType.fromIndex(nbt.getInt("glyph")).trowMagic((ServerLevel) pLevel, pPlayer.getOnPos(), pPlayer.getLookAngle(), 10);
+
+            GlyphType glyph = GlyphType.fromIndex(nbt.getInt("glyph"));
+
+            glyph.trowMagic((ServerLevel) pLevel, pPlayer.getOnPos(), pPlayer.getLookAngle(), 0.01f);
         }
 
         return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
