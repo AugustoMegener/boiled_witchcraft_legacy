@@ -58,7 +58,7 @@ public class Pencil extends Item  {
         CompoundTag nbt = item.getOrCreateTag();
 
         if (nbt.isEmpty()) {
-            nbt.putString("glyph", "fire");
+            nbt.putInt("glyph", 0);
             item.setTag(nbt);
         }
 
@@ -70,7 +70,7 @@ public class Pencil extends Item  {
         } else {
             nbt = item.getOrCreateTag();
 
-            DrawnGlyph(context, GlyphType.values()[nbt.getInt("glyph")]);
+            DrawnGlyph(context, GlyphType.fromIndex(nbt.getInt("glyph")));
         }
 
         return super.useOn(context);
@@ -82,7 +82,7 @@ public class Pencil extends Item  {
 
         if (level.isEmptyBlock(pos)) {
             if (level.getBlockState(context.getClickedPos()).isSolidRender(level, context.getClickedPos())) {
-                BlockState glyphBlock = GLYPH.get().defaultBlockState().setValue(Glyph.GLYPH, glyphType);
+                BlockState glyphBlock = GLYPH.get().defaultBlockState().setValue(Glyph.GLYPH, GlyphType.indexOf(glyphType));
 
                 level.setBlock(pos, glyphBlock, 0);
 

@@ -1,7 +1,9 @@
 package org.kitowashere.boiled_witchcraft.items;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.Level;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
 import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.core.Direction.UP;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
@@ -23,10 +26,14 @@ public class GlyphOnAPaper extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown()) {
-            GlyphType.values()[pPlayer.getItemInHand(pUsedHand).getTag().getInt("glyph")].trowMagic(pLevel, pPlayer.getLookAngle(), 10);
+        CompoundTag nbt = pPlayer.getItemInHand(pUsedHand).getTag();
+
+        if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
+
+            GlyphType.fromIndex(nbt.getInt("glyph")).trowMagic((ServerLevel) pLevel, pPlayer.getOnPos(), pPlayer.getLookAngle(), 10);
         }
-        return super.use(pLevel, pPlayer, pUsedHand);
+
+        return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
     }
 
     @Override
@@ -36,7 +43,7 @@ public class GlyphOnAPaper extends Item {
             BlockPos pos = pContext.getClickedPos();
 
             if (level.getBlockState(pos).isSolidRender(level, pos) && !pContext.getPlayer().isShiftKeyDown()) {
-                GlyphType.values()[pContext.getItemInHand().getTag().getInt("glyph")].doMagicInSurface(level, pos.above(), UP);
+                GlyphType.fromIndex(pContext.getItemInHand().getTag().getInt("glyph")).doMagicInSurface(level, pos.above(), UP);
                 pContext.getItemInHand().shrink(1);
             }
         }
