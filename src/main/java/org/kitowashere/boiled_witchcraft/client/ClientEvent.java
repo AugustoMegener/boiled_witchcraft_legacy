@@ -1,13 +1,11 @@
 package org.kitowashere.boiled_witchcraft.client;
 
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
-import org.kitowashere.boiled_witchcraft.client.renderer.MagicFireBallRenderer;
+import org.kitowashere.boiled_witchcraft.client.renderer.ThrowableMagicRenderer;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TFM;
@@ -20,7 +18,7 @@ public class ClientEvent {
     }
 
     @SubscribeEvent
-    public static void registerEntityRenderers(FMLClientSetupEvent event) {
-        EntityRenderers.register(TFM.get(), MagicFireBallRenderer::new);
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(TFM.get(), ThrowableMagicRenderer::new);
     }
 }

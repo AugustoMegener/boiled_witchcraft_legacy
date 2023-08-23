@@ -1,9 +1,6 @@
 package org.kitowashere.boiled_witchcraft.blocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -16,10 +13,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class GroundedPlantMagic extends Block {
+public class SurfacedPlantMagic extends Block {
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 2);
 
-    public GroundedPlantMagic() {
+    public SurfacedPlantMagic() {
         super(Properties.of(Material.GRASS).strength(10));
     }
 

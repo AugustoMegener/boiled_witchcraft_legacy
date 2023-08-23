@@ -13,7 +13,6 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
 public class ThrowableMagicModel extends EntityModel<AbstractHurtingProjectile> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(MODID, "throwable_magic"), "main");
 	private final ModelPart bb_main;
 
@@ -23,7 +22,7 @@ public class ThrowableMagicModel extends EntityModel<AbstractHurtingProjectile> 
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 6.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 24, 12);
 	}

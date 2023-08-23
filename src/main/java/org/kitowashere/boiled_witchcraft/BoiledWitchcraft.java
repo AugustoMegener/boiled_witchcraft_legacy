@@ -6,9 +6,7 @@ import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.kitowashere.boiled_witchcraft.core.GlyphType;
-import org.kitowashere.boiled_witchcraft.core.SurfacedMagic;
-import org.kitowashere.boiled_witchcraft.core.ThrowableMagic;
+import org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry;
 
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.BLOCKS;
 import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.ITEMS;
@@ -27,14 +25,11 @@ public class BoiledWitchcraft {
         ITEMS.register(modEventBus);
         ENTITIES.register(modEventBus);
 
-        GlyphType.register("fire", SurfacedMagic::fire, ThrowableMagic::fire);
-        GlyphType.register("ice", SurfacedMagic::ice, ThrowableMagic::fire);
-        GlyphType.register("light", SurfacedMagic::light, ThrowableMagic::fire);
-        GlyphType.register("plant", SurfacedMagic::plant, ThrowableMagic::fire);
-
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
+
+        GlyphTypeRegistry.register();
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

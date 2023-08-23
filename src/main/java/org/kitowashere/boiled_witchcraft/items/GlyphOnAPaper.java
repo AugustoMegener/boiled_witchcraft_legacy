@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
 import java.util.List;
-import java.util.Objects;
 
 import static net.minecraft.core.Direction.UP;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
@@ -29,11 +28,9 @@ public class GlyphOnAPaper extends Item {
         CompoundTag nbt = pPlayer.getItemInHand(pUsedHand).getTag();
 
         if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
-
-
             GlyphType glyph = GlyphType.fromIndex(nbt.getInt("glyph"));
 
-            glyph.trowMagic((ServerLevel) pLevel, pPlayer.getOnPos(), pPlayer.getLookAngle(), 0.01f);
+            glyph.magic().throwMagic((ServerLevel) pLevel, pPlayer, 2);
         }
 
         return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
@@ -45,8 +42,10 @@ public class GlyphOnAPaper extends Item {
             Level level = pContext.getLevel();
             BlockPos pos = pContext.getClickedPos();
 
-            if (level.getBlockState(pos).isSolidRender(level, pos) && !pContext.getPlayer().isShiftKeyDown()) {
-                GlyphType.fromIndex(pContext.getItemInHand().getTag().getInt("glyph")).doMagicInSurface(level, pos.above(), UP);
+            CompoundTag nbt =  pContext.getItemInHand().getTag();
+
+            if (level.getBlockState(pos).isSolidRender(level, pos) && !pContext.getPlayer().isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
+                GlyphType.fromIndex(nbt.getInt("glyph")).magic().doMagicInSurface(3, level, pos.above(), UP);
                 pContext.getItemInHand().shrink(1);
             }
         }

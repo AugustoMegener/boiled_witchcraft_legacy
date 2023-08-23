@@ -14,33 +14,33 @@ import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.ITEMS;
 public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 
-    public static final RegistryObject<Block> GLYPH = BLOCKS.register("glyph", Glyph::new);
+    public static final RegistryObject<Block> GLYPH = BLOCKS.register("glyph", GlyphBlock::new);
     public static final RegistryObject<Item> GLYPH_ITEM =
         ITEMS.register("glyph",
             () -> new BlockItem(GLYPH.get(), new Item.Properties())
         );
 
-    public static final RegistryObject<Block> GFM = BLOCKS.register("grounded_fire_magic", GroundedFireMagic::new);
+    public static final RegistryObject<Block> SFM = BLOCKS.register("grounded_fire_magic", SurfacedFireMagic::new);
     public static final RegistryObject<Item> GFM_ITEM =
             ITEMS.register("grounded_fire_magic",
-                    () -> new BlockItem(GFM.get(), new Item.Properties())
+                    () -> new BlockItem(SFM.get(), new Item.Properties())
             );
 
-    public static final RegistryObject<Block> GIM = BLOCKS.register("grounded_ice_magic", GroundedIceMagic::new);
+    public static final RegistryObject<Block> SIM = BLOCKS.register("grounded_ice_magic", SurfacedIceMagic::new);
     public static final RegistryObject<Item> GIM_ITEM =
             ITEMS.register("grounded_ice_magic",
-                    () -> new BlockItem(GIM.get(), new Item.Properties())
+                    () -> new BlockItem(SIM.get(), new Item.Properties())
             );
 
-    public static final RegistryObject<Block> GPM = BLOCKS.register("grounded_plant_magic", GroundedPlantMagic::new);
+    public static final RegistryObject<Block> SPM = BLOCKS.register("grounded_plant_magic", SurfacedPlantMagic::new);
     public static final RegistryObject<Item> GPM_ITEM =
             ITEMS.register("grounded_plant_magic",
-                    () -> new BlockItem(GPM.get(), new Item.Properties())
+                    () -> new BlockItem(SPM.get(), new Item.Properties())
             );
 
-    public static final RegistryObject<Block> SPARK = BLOCKS.register("spark", Spark::new);
+    public static final RegistryObject<Block> SLM = BLOCKS.register("spark", SurfacedLightMagic::new);
     public static final RegistryObject<Item> SPARK_ITEM =
             ITEMS.register("spark",
-                    () -> new BlockItem(SPARK.get(), new Item.Properties())
+                    () -> new BlockItem(SLM.get(), new Item.Properties())
             );
 }

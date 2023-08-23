@@ -15,7 +15,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import org.kitowashere.boiled_witchcraft.blocks.Glyph;
+import org.kitowashere.boiled_witchcraft.blocks.GlyphBlock;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
 import java.util.List;
@@ -82,7 +82,7 @@ public class Pencil extends Item  {
 
         if (level.isEmptyBlock(pos)) {
             if (level.getBlockState(context.getClickedPos()).isSolidRender(level, context.getClickedPos())) {
-                BlockState glyphBlock = GLYPH.get().defaultBlockState().setValue(Glyph.GLYPH, GlyphType.indexOf(glyphType));
+                BlockState glyphBlock = GLYPH.get().defaultBlockState().setValue(GlyphBlock.GLYPH, GlyphType.indexOf(glyphType));
 
                 level.setBlock(pos, glyphBlock, 0);
 
