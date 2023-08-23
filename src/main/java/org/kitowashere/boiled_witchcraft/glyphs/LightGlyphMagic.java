@@ -8,13 +8,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;
 
-public class LightGlyphMagic<T extends ThrowableMagicEntity> extends GlyphMagic<T> {
+public class LightGlyphMagic extends GlyphMagic {
 
-    public LightGlyphMagic(Block block, EntityType<T> projectile) {
+    public LightGlyphMagic(Block block, EntityType projectile) {
         super(block, projectile);
     }
 

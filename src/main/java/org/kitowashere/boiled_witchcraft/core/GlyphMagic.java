@@ -11,11 +11,11 @@ import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;
 
-public abstract class GlyphMagic<T extends ThrowableMagicEntity> {
+public abstract class GlyphMagic {
     public final Block BLOCK;
-    public final EntityType<T> PROJECTILE;
+    public final EntityType PROJECTILE;
 
-    public GlyphMagic(Block block, EntityType<T> projectile) {
+    public GlyphMagic(Block block, EntityType projectile) {
         BLOCK = block;
         PROJECTILE = projectile;
     }

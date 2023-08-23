@@ -9,10 +9,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.kitowashere.boiled_witchcraft.blocks.SurfacedFireMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
-public class FireGlyphMagic<T extends ThrowableMagicEntity> extends GlyphMagic<T> {
-    public FireGlyphMagic(Block block, EntityType<T> projectile) {
+public class FireGlyphMagic extends GlyphMagic {
+    public FireGlyphMagic(Block block, EntityType projectile) {
         super(block, projectile);
     }
 

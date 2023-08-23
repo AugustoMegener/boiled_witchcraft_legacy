@@ -11,8 +11,8 @@ import org.kitowashere.boiled_witchcraft.blocks.SurfacedFireMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
-public class PlantGlyphMagic<T extends ThrowableMagicEntity> extends GlyphMagic<T> {
-    public PlantGlyphMagic(Block block, EntityType<T> projectile) {
+public class PlantGlyphMagic extends GlyphMagic {
+    public PlantGlyphMagic(Block block, EntityType projectile) {
         super(block, projectile);
     }
 
