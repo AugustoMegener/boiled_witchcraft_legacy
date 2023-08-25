@@ -15,16 +15,19 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
 import static net.minecraft.core.Direction.UP;
 
 public class GlyphBlock extends Block {
-    public static final IntegerProperty GLYPH = IntegerProperty.create("glyph",0, 3);
+    public static final IntegerProperty GLYPH = IntegerProperty.create("glyph",0, GlyphType.getGlyphAmount());
 
     public GlyphBlock() {
         super(Properties.of(Material.AIR).requiresCorrectToolForDrops().noCollission().instabreak());
     }
+
+    public GlyphMagic getGlyphMagic(BlockState state) { return GlyphType.fromIndex(state.getValue(GLYPH)).magic(); }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -35,14 +38,17 @@ public class GlyphBlock extends Block {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(!player.isShiftKeyDown()) GlyphType.fromIndex(state.getValue(GLYPH)).magic().doMagicInSurface( 3, level, pos, UP);
+        if(!player.isShiftKeyDown()) getGlyphMagic(state).applyOnSurface(level, pos, UP);
 
         return InteractionResult.SUCCESS;
     }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        GlyphType.fromIndex(state.getValue(GLYPH)).magic().doMagicInSurface(3, level, pos, UP);
+        GlyphMagic magic = getGlyphMagic(state);
+
+        magic.glyphTouched(state, level, pos, entity, UP);
+        magic.applyOnSurface(level, pos, UP);
 
         super.entityInside(state, level, pos, entity);
     }

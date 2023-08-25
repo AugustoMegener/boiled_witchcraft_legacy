@@ -13,23 +13,25 @@ import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 import static org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel.LAYER_LOCATION;
 
 public class ThrowableMagicRenderer<T extends ThrowableMagicEntity> extends EntityRenderer<T> {
-    private ModelPart baked_layer;
+    private final ModelPart BAKED_LAYER;
+    public final ResourceLocation TEXTURE;
 
-    public ThrowableMagicRenderer(EntityRendererProvider.Context pContext) {
+    public ThrowableMagicRenderer(EntityRendererProvider.Context pContext, ResourceLocation texture) {
         super(pContext);
-        baked_layer = pContext.bakeLayer(LAYER_LOCATION);
+        BAKED_LAYER = pContext.bakeLayer(LAYER_LOCATION);
+        TEXTURE = texture;
     }
 
     @Override
     public void render(T pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-        ThrowableMagicModel model = new ThrowableMagicModel(baked_layer);
+        ThrowableMagicModel model = new ThrowableMagicModel(BAKED_LAYER);
         model.prepareMobModel(pEntity, 0, 0, pPartialTick);
 
-        model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(pEntity.TEXTURE)), pPackedLight, OverlayTexture.NO_OVERLAY, 1 ,1 ,1, 1);
+        model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(getTextureLocation(pEntity))), pPackedLight, OverlayTexture.NO_OVERLAY, 1 ,1 ,1, 1);
     }
 
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
-        return pEntity.TEXTURE;
+        return TEXTURE;
     }
 }

@@ -11,11 +11,4 @@ public class SurfacedIceMagic extends Block {
     public SurfacedIceMagic() {
         super(Properties.of(Material.ICE_SOLID).explosionResistance(-1).requiresCorrectToolForDrops().strength(10));
     }
-
-    @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.setTicksFrozen(1200);
-
-        super.entityInside(state, level, pos, entity);
-    }
 }

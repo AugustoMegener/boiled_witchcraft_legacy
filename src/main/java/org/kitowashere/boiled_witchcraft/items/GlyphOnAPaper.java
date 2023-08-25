@@ -30,7 +30,10 @@ public class GlyphOnAPaper extends Item {
         if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
             GlyphType glyph = GlyphType.fromIndex(nbt.getInt("glyph"));
 
-            glyph.magic().throwMagic((ServerLevel) pLevel, pPlayer, 2);
+            glyph.magic().useOnPaper((ServerLevel) pLevel, pPlayer, 2);
+            pPlayer.getItemInHand(pUsedHand).shrink(1);
+
+            pPlayer.getCooldowns().addCooldown(pPlayer.getItemInHand(pUsedHand).getItem(), 40);
         }
 
         return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
@@ -38,15 +41,17 @@ public class GlyphOnAPaper extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
-        if (!pContext.getLevel().isClientSide()) {
+        if (!pContext.getLevel().isClientSide() && !pContext.getPlayer().isShiftKeyDown()) {
             Level level = pContext.getLevel();
             BlockPos pos = pContext.getClickedPos();
 
             CompoundTag nbt =  pContext.getItemInHand().getTag();
 
-            if (level.getBlockState(pos).isSolidRender(level, pos) && !pContext.getPlayer().isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
-                GlyphType.fromIndex(nbt.getInt("glyph")).magic().doMagicInSurface(3, level, pos.above(), UP);
+            if (level.getBlockState(pos).isSolidRender(level, pos) && nbt != null && nbt.contains("glyph")) {
+                GlyphType.fromIndex(nbt.getInt("glyph")).magic().applyOnSurface(level, pos.above(), UP);
                 pContext.getItemInHand().shrink(1);
+
+                pContext.getPlayer().getCooldowns().addCooldown(pContext.getItemInHand().getItem(), 40);
             }
         }
 

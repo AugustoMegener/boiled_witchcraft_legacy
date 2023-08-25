@@ -46,6 +46,7 @@ public class Pencil extends Item  {
             paper.setTag(pPlayer.getItemInHand(pUsedHand).getTag());
 
             pPlayer.getInventory().add(paper);
+            pPlayer.getCooldowns().addCooldown(pPlayer.getItemInHand(pUsedHand).getItem(), 40);
         }
 
         return super.use(pLevel, pPlayer, pUsedHand);

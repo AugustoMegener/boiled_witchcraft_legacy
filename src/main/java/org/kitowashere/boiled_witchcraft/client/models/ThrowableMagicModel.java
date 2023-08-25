@@ -7,12 +7,14 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
-public class ThrowableMagicModel extends EntityModel<AbstractHurtingProjectile> {
+public class ThrowableMagicModel extends EntityModel<ThrowableMagicEntity> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(MODID, "throwable_magic"), "main");
 	private final ModelPart bb_main;
 
@@ -28,7 +30,7 @@ public class ThrowableMagicModel extends EntityModel<AbstractHurtingProjectile> 
 	}
 
 	@Override
-	public void setupAnim(AbstractHurtingProjectile entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(ThrowableMagicEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
 	}
 
