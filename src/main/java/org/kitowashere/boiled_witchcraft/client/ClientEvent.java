@@ -3,6 +3,7 @@ package org.kitowashere.boiled_witchcraft.client;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
@@ -39,5 +40,10 @@ public class ClientEvent {
                 TPM.get(),
                 pContext -> new ThrowableMagicRenderer<>(pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/plant.png"))
         );
+    }
+
+    @SubscribeEvent
+    public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll("glyph_selector", Overlays.GLYPH_SELECTOR);
     }
 }

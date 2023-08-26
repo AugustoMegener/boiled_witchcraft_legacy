@@ -16,11 +16,10 @@ import org.kitowashere.boiled_witchcraft.blocks.SurfacedFireMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
-public class PlantGlyphMagic extends GlyphMagic {
-    public PlantGlyphMagic(RegistryObject<Block> block, RegistryObject<EntityType<ThrowableMagicEntity>> projectile) {
-        super(block, projectile);
-    }
+import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPM;
+import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TLM;
 
+public class PlantGlyphMagic extends GlyphMagic {
     @Override
     public void glyphTouched(BlockState state, Level level, BlockPos pos, Entity entity, Direction surface) {
         if (entity instanceof LivingEntity) {
@@ -30,11 +29,11 @@ public class PlantGlyphMagic extends GlyphMagic {
 
     @Override
     public void applyOnSurface(Level level, BlockPos pos, Direction surface) {
-        makePillar(3, level, pos, surface, SurfacedFireMagic.LEVEL, 3);
+        makePillar(SPM.get(), 3, level, pos, surface, SurfacedFireMagic.LEVEL, 3);
     }
 
     @Override
     public void useOnPaper(ServerLevel level, LivingEntity shooter, float vel) {
-        shootProjectile(level, shooter, vel);
+        shootProjectile(TLM.get().create(level) , level, shooter, vel);
     }
 }

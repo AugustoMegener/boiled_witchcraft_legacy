@@ -12,13 +12,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.RegistryObject;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
+import org.kitowashere.boiled_witchcraft.entities.ThrowableIceMagic;
 import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
-public class IceGlyphMagic extends GlyphMagic {
-    public IceGlyphMagic(RegistryObject<Block> block, RegistryObject<EntityType<ThrowableMagicEntity>> projectile) {
-        super(block, projectile);
-    }
+import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SIM;
+import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TIM;
 
+public class IceGlyphMagic extends GlyphMagic {
     @Override
     public void glyphTouched(BlockState state, Level level, BlockPos pos, Entity entity, Direction surface) {
         entity.moveTo(pos.mutable().move(surface, 4), entity.getYRot(), entity.getXRot());
@@ -26,11 +26,11 @@ public class IceGlyphMagic extends GlyphMagic {
 
     @Override
     public void applyOnSurface(Level level, BlockPos pos, Direction surface) {
-        makePillar(3, level, pos, surface);
+        makePillar(SIM.get() ,3, level, pos, surface);
     }
 
     @Override
     public void useOnPaper(ServerLevel level, LivingEntity shooter, float vel) {
-        shootProjectile(level, shooter, vel);
+        shootProjectile(TIM.get().create(level), level, shooter, vel);
     }
 }

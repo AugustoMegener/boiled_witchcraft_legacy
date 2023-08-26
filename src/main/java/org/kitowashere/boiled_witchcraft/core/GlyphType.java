@@ -1,8 +1,10 @@
 package org.kitowashere.boiled_witchcraft.core;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.ArrayList;
 
-public record GlyphType(String name, GlyphMagic magic) {
+public record GlyphType(String name, GlyphMagic magic, ResourceLocation texture) {
     private static final ArrayList<GlyphType> registeredGlyphs = new ArrayList<>();
 
     public static int getGlyphAmount() { return registeredGlyphs.size(); }
@@ -15,7 +17,7 @@ public record GlyphType(String name, GlyphMagic magic) {
 
     public static GlyphType fromIndex(int index) { return index <= registeredGlyphs.size() ? registeredGlyphs.get(index) : null; }
 
-    public static void register(String name, GlyphMagic magic) {
-        registeredGlyphs.add(new GlyphType(name, magic));
+    public static void register(String name, GlyphMagic magic, ResourceLocation texture) {
+        registeredGlyphs.add(new GlyphType(name, magic, texture));
     }
 }

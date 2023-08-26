@@ -6,22 +6,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
 
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;
+import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SLM;
+import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TLM;
 
 public class LightGlyphMagic extends GlyphMagic {
-    public LightGlyphMagic(RegistryObject<Block> block, RegistryObject<EntityType<ThrowableMagicEntity>> projectile) {
-        super(block, projectile);
-    }
-
     @Override
     public void glyphTouched(BlockState state, Level level, BlockPos pos, Entity entity, Direction surface) {
         if (entity instanceof LivingEntity) {
@@ -31,12 +25,12 @@ public class LightGlyphMagic extends GlyphMagic {
 
     @Override
     public void applyOnSurface(Level level, BlockPos pos, Direction surface) {
-        level.setBlock(pos.mutable().move(surface, 1), BLOCK.get().defaultBlockState(), UPDATE_ALL);
+        level.setBlock(pos.mutable().move(surface, 1), SLM.get().defaultBlockState(), UPDATE_ALL);
         level.removeBlock(pos, false);
     }
 
     @Override
     public void useOnPaper(ServerLevel level, LivingEntity shooter, float vel) {
-        shootProjectile(level, shooter, vel);
+        shootProjectile(TLM.get().create(level) ,level, shooter, vel);
     }
 }
