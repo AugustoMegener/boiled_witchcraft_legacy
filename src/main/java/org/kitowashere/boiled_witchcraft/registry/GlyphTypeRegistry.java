@@ -13,9 +13,9 @@ import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.*;
 
 public class GlyphTypeRegistry {
     public static void register() {
-        GlyphType.register("fire", new FireGlyphMagic(SFM, TFM), new ResourceLocation(MODID, "textures/block/glyph_fire.png"));
-        GlyphType.register("ice", new IceGlyphMagic(SIM, TIM), new ResourceLocation(MODID, "textures/block/glyph_ice.png"));
-        GlyphType.register("light", new LightGlyphMagic(SLM, TLM), new ResourceLocation(MODID, "textures/block/glyph_light.png"));
-        GlyphType.register("plant", new PlantGlyphMagic(SPM, TPM), new ResourceLocation(MODID, "textures/block/glyph_plant.png"));
+        GlyphType.register("fire", new FireGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_fire.png"));
+        GlyphType.register("ice", new IceGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_ice.png"));
+        GlyphType.register("light", new LightGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_light.png"));
+        GlyphType.register("plant", new PlantGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_plant.png"));
     }
 }
