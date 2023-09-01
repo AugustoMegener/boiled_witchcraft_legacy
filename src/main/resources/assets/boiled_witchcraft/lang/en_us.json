@@ -2,10 +2,10 @@
   "item.boiled_witchcraft.pencil": "Pencil",
   "item.boiled_witchcraft.glyph_paper": "Glyph On a Paper",
 
-  "boiled_witchcraft.pencil.message.0": "Fire glyph",
-  "boiled_witchcraft.pencil.message.1": "Ice glyph",
-  "boiled_witchcraft.pencil.message.2": "Light glyph",
-  "boiled_witchcraft.pencil.message.3": "Plant glyph",
+  "boiled_witchcraft.glyph_type.fire": "Fire glyph",
+  "boiled_witchcraft.glyph_type.ice": "Ice glyph",
+  "boiled_witchcraft.glyph_type.light": "Light glyph",
+  "boiled_witchcraft.glyph_type.plant": "Plant glyph",
 
   "block.boiled_witchcraft.glyph": "Glyph",
   "block.boiled_witchcraft.grounded_fire_magic": "Fire Magic",

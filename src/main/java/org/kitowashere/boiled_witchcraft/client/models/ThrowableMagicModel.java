@@ -7,10 +7,8 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
+import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 

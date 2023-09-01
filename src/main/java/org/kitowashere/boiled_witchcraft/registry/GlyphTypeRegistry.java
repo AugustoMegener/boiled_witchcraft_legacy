@@ -2,20 +2,34 @@ package org.kitowashere.boiled_witchcraft.registry;
 
 import net.minecraft.resources.ResourceLocation;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
-import org.kitowashere.boiled_witchcraft.glyphs.FireGlyphMagic;
-import org.kitowashere.boiled_witchcraft.glyphs.IceGlyphMagic;
-import org.kitowashere.boiled_witchcraft.glyphs.LightGlyphMagic;
-import org.kitowashere.boiled_witchcraft.glyphs.PlantGlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.type.FireGlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.type.IceGlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.type.LightGlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.type.PlantGlyphMagic;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
-import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.*;
-import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.*;
 
 public class GlyphTypeRegistry {
     public static void register() {
-        GlyphType.register("fire", new FireGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_fire.png"));
-        GlyphType.register("ice", new IceGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_ice.png"));
-        GlyphType.register("light", new LightGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_light.png"));
-        GlyphType.register("plant", new PlantGlyphMagic(), new ResourceLocation(MODID, "textures/block/glyph_plant.png"));
+        new GlyphType(
+                "fire",
+                FireGlyphMagic::new,
+                new ResourceLocation(MODID, "textures/block/fire_glyph.png")
+        );
+        new GlyphType(
+                "ice",
+                IceGlyphMagic::new,
+                new ResourceLocation(MODID, "textures/block/ice_glyph.png")
+        );
+        new GlyphType(
+                "light",
+                LightGlyphMagic::new,
+                new ResourceLocation(MODID, "textures/block/light_glyph.png")
+        );
+        new GlyphType(
+                "plant",
+                PlantGlyphMagic::new,
+                new ResourceLocation(MODID, "textures/block/plant_glyph.png")
+        );
     }
 }

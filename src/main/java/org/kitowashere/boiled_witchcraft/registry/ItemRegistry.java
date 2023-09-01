@@ -4,7 +4,8 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.kitowashere.boiled_witchcraft.items.*;
+import org.kitowashere.boiled_witchcraft.world.items.GlyphOnAPaper;
+import org.kitowashere.boiled_witchcraft.world.items.Pencil;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 

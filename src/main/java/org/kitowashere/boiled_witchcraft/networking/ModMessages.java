@@ -6,7 +6,7 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import org.kitowashere.boiled_witchcraft.networking.packet.GlyphContextPacket;
+import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacket;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
@@ -28,7 +28,11 @@ public class ModMessages {
 
         INSTANCE = net;
 
-        net.messageBuilder(GlyphContextPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT);
+        net.messageBuilder(GCTXPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(GCTXPacket::new)
+                .encoder(GCTXPacket::toBytes)
+                .consumerMainThread(GCTXPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) { INSTANCE.sendToServer(message); }

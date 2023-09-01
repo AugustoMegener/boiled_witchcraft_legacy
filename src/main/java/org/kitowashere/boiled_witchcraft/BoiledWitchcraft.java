@@ -10,6 +10,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 import org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry;
 
+import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.BLOCK_ENTITIES;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.BLOCKS;
 import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.ITEMS;
 import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.ENTITIES;
@@ -26,16 +27,18 @@ public class BoiledWitchcraft {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         ENTITIES.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::commonSetup);
 
         GlyphTypeRegistry.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ModMessages.register();
+        event.enqueueWork(ModMessages::register);
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

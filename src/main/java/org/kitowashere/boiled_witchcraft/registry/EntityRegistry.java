@@ -6,7 +6,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.kitowashere.boiled_witchcraft.entities.*;
+import org.kitowashere.boiled_witchcraft.world.entities.*;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 

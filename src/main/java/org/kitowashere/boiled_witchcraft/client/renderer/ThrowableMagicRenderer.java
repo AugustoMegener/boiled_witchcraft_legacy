@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
-import org.kitowashere.boiled_witchcraft.entities.ThrowableMagicEntity;
+import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
 import static org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel.LAYER_LOCATION;
 
