@@ -8,6 +8,8 @@ import org.kitowashere.boiled_witchcraft.core.GlyphType;
 
 import java.util.function.Supplier;
 
+import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.FIRE_GLYPH;
+
 public class GCTXPacket {
     private final GlyphType SELECTED_GLYPH;
     private final GlyphMagic MAGIC;
@@ -23,7 +25,9 @@ public class GCTXPacket {
     }
 
     public GCTXPacket(FriendlyByteBuf buf) {
-        SELECTED_GLYPH = GlyphType.fromString(buf.readUtf());
+        GlyphType new_glyph = GlyphType.fromString(buf.readUtf());
+
+        SELECTED_GLYPH = new_glyph!=null ? new_glyph : FIRE_GLYPH;
         MAGIC = SELECTED_GLYPH.newMagic();
         MAGIC.fromBytes(buf);
     }

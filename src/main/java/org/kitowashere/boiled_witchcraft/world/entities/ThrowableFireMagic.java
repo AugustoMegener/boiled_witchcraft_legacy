@@ -4,6 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.NotNull;
 
 
 public class ThrowableFireMagic extends ThrowableMagicEntity {
@@ -18,7 +19,7 @@ public class ThrowableFireMagic extends ThrowableMagicEntity {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult pResult) {
+    protected void onHitBlock(@NotNull BlockHitResult pResult) {
         this.level.explode(this, this.getX(), this.getY(), this.getZ(), 0.5f, true, Level.ExplosionInteraction.BLOCK);
         this.discard();
     }

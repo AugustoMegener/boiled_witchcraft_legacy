@@ -1,4 +1,4 @@
-package org.kitowashere.boiled_witchcraft.core.glyph.type;
+package org.kitowashere.boiled_witchcraft.core.glyph.magic;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +13,7 @@ import org.kitowashere.boiled_witchcraft.core.GlyphContext;
 import org.kitowashere.boiled_witchcraft.core.glyph.context.PillarContext;
 import org.kitowashere.boiled_witchcraft.world.blocks.SurfacedFireMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
+import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPM;
 import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TLM;
@@ -37,6 +38,10 @@ public class PlantGlyphMagic extends GlyphMagic {
 
     @Override
     public void useOnPaper(ServerLevel level, LivingEntity shooter, float vel) {
-        shootProjectile(TLM.get().create(level), level, shooter, vel);
+        ThrowableMagicEntity projectile = TLM.get().create(level);
+
+        if (projectile != null) {
+            shootProjectile(projectile, level, shooter, vel);
+        }
     }
 }

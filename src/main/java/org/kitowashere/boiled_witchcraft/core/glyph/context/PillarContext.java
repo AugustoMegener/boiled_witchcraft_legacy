@@ -3,15 +3,11 @@ package org.kitowashere.boiled_witchcraft.core.glyph.context;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import org.kitowashere.boiled_witchcraft.core.GlyphContext;
-
-
-import javax.annotation.Nullable;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 

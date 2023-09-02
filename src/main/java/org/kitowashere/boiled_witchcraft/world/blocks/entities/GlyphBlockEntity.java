@@ -11,10 +11,11 @@ import org.kitowashere.boiled_witchcraft.core.GlyphType;
 import java.util.Objects;
 
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.GLYPH_BLOCK_ENTITY;
+import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.FIRE_GLYPH;
 
 public class GlyphBlockEntity extends BlockEntity {
-    public GlyphType glyph;
-    public GlyphMagic magic;
+    private GlyphType glyph;
+    private GlyphMagic magic;
 
     public GlyphBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(GLYPH_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -35,5 +36,14 @@ public class GlyphBlockEntity extends BlockEntity {
 
         pTag.putString("glyph", glyph.name());
         pTag.put("context", magic.serializeNBT());
+    }
+
+    public GlyphMagic getMagic() {
+        if (magic == null) {
+            if (glyph == null) glyph = FIRE_GLYPH;
+            magic = glyph.newMagic();
+        }
+
+        return magic;
     }
 }

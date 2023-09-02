@@ -1,6 +1,5 @@
 package org.kitowashere.boiled_witchcraft.core;
 
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.NotNull;
 

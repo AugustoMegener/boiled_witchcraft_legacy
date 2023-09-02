@@ -16,12 +16,12 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
-import org.kitowashere.boiled_witchcraft.world.player.capabilities.gctx.PlayerGCTXProvider;
 
 import java.util.List;
 
 import static net.minecraft.core.Direction.UP;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
+import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.FIRE_GLYPH;
 
 public class GlyphOnAPaper extends Item {
     public GlyphOnAPaper() { super(new Properties()); }
@@ -31,7 +31,9 @@ public class GlyphOnAPaper extends Item {
         CompoundTag nbt = pPlayer.getItemInHand(pUsedHand).getTag();
 
         if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("glyph")) {
-            GlyphMagic magic = GlyphType.fromIndex(nbt.getInt("glyph")).newMagic();
+            GlyphType glyphType = GlyphType.fromIndex(nbt.getInt("glyph"));
+
+            GlyphMagic magic = glyphType != null ? glyphType.newMagic() : FIRE_GLYPH.newMagic();
             magic.deserializeNBT((CompoundTag) nbt.get("contexts"));
 
             magic.useOnPaper((ServerLevel) pLevel, pPlayer, 2);
@@ -45,8 +47,6 @@ public class GlyphOnAPaper extends Item {
 
     @Override
     public @NotNull InteractionResult useOn(UseOnContext pContext) {
-        Player player = pContext.getPlayer();
-
         if (!pContext.getLevel().isClientSide() && pContext.getPlayer()!=null && !pContext.getPlayer().isShiftKeyDown()) {
             Level level = pContext.getLevel();
             BlockPos pos = pContext.getClickedPos();
@@ -54,7 +54,9 @@ public class GlyphOnAPaper extends Item {
             CompoundTag nbt =  pContext.getItemInHand().getTag();
 
             if (level.getBlockState(pos).isSolidRender(level, pos) && nbt != null && nbt.contains("glyph") && GlyphType.fromIndex(nbt.getInt("glyph"))!=null) {
-                GlyphMagic magic = GlyphType.fromString(nbt.getString("glyph")).newMagic();
+                GlyphType glyphType = GlyphType.fromIndex(nbt.getInt("glyph"));
+
+                GlyphMagic magic = glyphType != null ? glyphType.newMagic() : FIRE_GLYPH.newMagic();
                 magic.deserializeNBT((CompoundTag) nbt.get("contexts"));
 
                 magic.applyOnSurface(level, pos.above(), UP);

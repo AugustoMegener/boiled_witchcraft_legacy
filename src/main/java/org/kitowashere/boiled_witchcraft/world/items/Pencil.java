@@ -16,19 +16,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.world.blocks.GlyphBlock;
 import org.kitowashere.boiled_witchcraft.client.ClientGCTX;
+import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.core.GlyphType;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacket;
-import org.kitowashere.boiled_witchcraft.world.blocks.entities.GlyphBlockEntity;
+import org.kitowashere.boiled_witchcraft.world.blocks.GlyphBlock;
 import org.kitowashere.boiled_witchcraft.world.player.capabilities.gctx.PlayerGCTXProvider;
 
 import java.util.List;
 
-import static net.minecraft.world.InteractionHand.*;
+import static net.minecraft.world.InteractionHand.MAIN_HAND;
+import static net.minecraft.world.InteractionHand.OFF_HAND;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH_BLOCK;
+import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.FIRE_GLYPH;
 import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.GLYPH_ON_A_PAPER;
 
 public class Pencil extends Item  {
@@ -99,15 +100,12 @@ public class Pencil extends Item  {
         BlockPos pos = context.getClickedPos().above();
 
         if (level.isEmptyBlock(pos) && level.getBlockState(context.getClickedPos()).isSolidRender(level, context.getClickedPos())) {
-            GlyphBlock glyphBlock = (GlyphBlock) GLYPH_BLOCK.get();
-            BlockState glyphBlockState = glyphBlock.defaultBlockState().setValue(GlyphBlock.GLYPH, GlyphType.fromString(nbt.getString("glyph")));
+            GlyphType glyph = GlyphType.fromString(nbt.getString("glyph"));
+
+            BlockState glyphBlockState = GLYPH_BLOCK.get().defaultBlockState().setValue(GlyphBlock.GLYPH, glyph!=null ? glyph : FIRE_GLYPH);
 
             level.setBlock(pos, glyphBlockState, 0);
-
-            GlyphBlockEntity blockEntity = (GlyphBlockEntity) glyphBlock.newBlockEntity(pos, glyphBlockState);
-            blockEntity.load(nbt);
-
-            level.setBlockEntity(blockEntity);
+            GlyphBlock.setGlyphCTX(level, pos, nbt);
         }
     }
 

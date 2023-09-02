@@ -19,5 +19,5 @@ public class BlockRegistry {
 
     public static final RegistryObject<Block> SPM = BLOCKS.register("surfaced_plant_magic", SurfacedPlantMagic::new);
 
-    public static final RegistryObject<Block> SLM = BLOCKS.register("spark", SurfacedLightMagic::new);
+    public static final RegistryObject<Block> SLM = BLOCKS.register("surfaced_light_magic", SurfacedLightMagic::new);
 }

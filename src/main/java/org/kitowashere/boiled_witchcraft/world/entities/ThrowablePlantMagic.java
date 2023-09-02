@@ -9,7 +9,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import org.kitowashere.boiled_witchcraft.core.GlyphType;
+
+import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.PLANT_GLYPH;
 
 public class ThrowablePlantMagic extends ThrowableMagicEntity {
     public ThrowablePlantMagic(EntityType<ThrowableMagicEntity> pEntityType, Level pLevel) {
@@ -29,7 +30,7 @@ public class ThrowablePlantMagic extends ThrowableMagicEntity {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        GlyphType.fromString("plant").newMagic().applyOnSurface(level, pResult.getBlockPos().above(), Direction.UP);
+        PLANT_GLYPH.newMagic().applyOnSurface(level, pResult.getBlockPos().above(), Direction.UP);
         this.discard();
     }
 }

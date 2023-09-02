@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
 import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
@@ -23,7 +24,7 @@ public class ThrowableMagicRenderer<T extends ThrowableMagicEntity> extends Enti
     }
 
     @Override
-    public void render(T pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(@NotNull T pEntity, float pEntityYaw, float pPartialTick, @NotNull PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         ThrowableMagicModel model = new ThrowableMagicModel(BAKED_LAYER);
         model.prepareMobModel(pEntity, 0, 0, pPartialTick);
 
@@ -31,7 +32,7 @@ public class ThrowableMagicRenderer<T extends ThrowableMagicEntity> extends Enti
     }
 
     @Override
-    public ResourceLocation getTextureLocation(T pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull T pEntity) {
         return TEXTURE;
     }
 }

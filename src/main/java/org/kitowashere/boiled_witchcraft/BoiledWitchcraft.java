@@ -8,13 +8,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
-import org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry;
 
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.BLOCK_ENTITIES;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.BLOCKS;
-import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.ITEMS;
 import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.ENTITIES;
-
+import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.ITEMS;
 import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.PENCIL;
 
 @Mod(BoiledWitchcraft.MODID)
@@ -33,8 +31,6 @@ public class BoiledWitchcraft {
 
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::commonSetup);
-
-        GlyphTypeRegistry.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

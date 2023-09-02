@@ -5,7 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.function.Supplier;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
@@ -13,10 +12,7 @@ import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 public record GlyphType(@NotNull String name, @NotNull Supplier<GlyphMagic> magic, @NotNull ResourceLocation texture) implements Comparable<GlyphType> {
     private static final ArrayList<GlyphType> registeredGlyphs = new ArrayList<>();
 
-
     public GlyphType { registeredGlyphs.add(this); }
-
-    public static int getGlyphAmount() { return registeredGlyphs.size(); }
 
     public static int indexOf(GlyphType glyphType) { return registeredGlyphs.indexOf(glyphType); }
 
@@ -40,8 +36,6 @@ public record GlyphType(@NotNull String name, @NotNull Supplier<GlyphMagic> magi
 
     @Override
     public int compareTo(@NotNull GlyphType o) {
-        if (indexOf(this) == indexOf(o)) return 0;
-        else if (indexOf(this) > indexOf(o)) return -1;
-        else return  1;
+        return Integer.compare(indexOf(o), indexOf(this));
     }
 }

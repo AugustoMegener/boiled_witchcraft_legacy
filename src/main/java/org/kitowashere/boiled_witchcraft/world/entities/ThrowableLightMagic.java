@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class ThrowableLightMagic extends ThrowableMagicEntity {
     public ThrowableLightMagic(EntityType<ThrowableMagicEntity> pEntityType, Level pLevel) {
@@ -26,7 +27,7 @@ public class ThrowableLightMagic extends ThrowableMagicEntity {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult pResult) {
+    protected void onHitBlock(@NotNull BlockHitResult pResult) {
         this.discard();
     }
 }

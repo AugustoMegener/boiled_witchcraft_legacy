@@ -34,11 +34,11 @@ public class ModEvent {
 
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        event.getOriginal().getCapability(PlayerGCTXProvider.PLAYER_CONTEXT).ifPresent(oldStore -> {
-            event.getOriginal().getCapability(PlayerGCTXProvider.PLAYER_CONTEXT).ifPresent(newStore -> {
-                newStore.copyFrom(oldStore);
-            });
-        });
+        event.getOriginal().getCapability(PlayerGCTXProvider.PLAYER_CONTEXT).ifPresent(
+            oldStore -> event.getOriginal().getCapability(PlayerGCTXProvider.PLAYER_CONTEXT).ifPresent(
+                    newStore -> newStore.copyFrom(oldStore)
+            )
+        );
     }
 
     @SubscribeEvent

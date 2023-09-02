@@ -2,7 +2,6 @@ package org.kitowashere.boiled_witchcraft.world.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -12,13 +11,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -30,10 +24,9 @@ import org.kitowashere.boiled_witchcraft.core.GlyphType;
 import org.kitowashere.boiled_witchcraft.core.GlyphTypeProperty;
 import org.kitowashere.boiled_witchcraft.world.blocks.entities.GlyphBlockEntity;
 
-import java.util.Optional;
-
 import static net.minecraft.core.Direction.UP;
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.GLYPH_BLOCK_ENTITY;
+import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH_BLOCK;
 
 public class GlyphBlock extends Block implements EntityBlock {
     public static final GlyphTypeProperty GLYPH = new GlyphTypeProperty("glyph", GlyphType.class);
@@ -43,10 +36,22 @@ public class GlyphBlock extends Block implements EntityBlock {
         super(Properties.of(Material.AIR).requiresCorrectToolForDrops().noCollission().instabreak());
     }
 
+    public static void setGlyphCTX(Level level, BlockPos pos, CompoundTag nbt) {
+        BlockEntity entity = level.getBlockEntity(pos);
+
+        if (entity == null) {
+            entity = (((GlyphBlock) GLYPH_BLOCK.get())).newBlockEntity(pos, level.getBlockState(pos));
+        }
+
+        if (entity != null) {
+            entity.load(nbt);
+        }
+    }
+
     public GlyphMagic getGlyphMagic(Level level, BlockPos pos) {
         GlyphBlockEntity blockEntity = (GlyphBlockEntity) level.getBlockEntity(pos);
 
-        return blockEntity==null ? null : blockEntity.magic;
+        return blockEntity==null ? null : blockEntity.getMagic();
     }
 
     @Override
@@ -57,7 +62,7 @@ public class GlyphBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
         GlyphMagic magic = getGlyphMagic(level, pos);
 
         if(!player.isShiftKeyDown() && magic!=null) {
@@ -68,10 +73,10 @@ public class GlyphBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    public void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Entity entity) {
         GlyphMagic magic = getGlyphMagic(level, pos);
 
-        if(magic!=null) {
+        if (magic != null) {
             magic.glyphTouched(state, level, pos, entity, UP);
             magic.applyOnSurface(level, pos, UP);
         }
@@ -80,7 +85,7 @@ public class GlyphBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter getter, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return  Block.box(0.0D, 0.0D, 0.0D, 16.0D, 0.01D, 16.0D);
     }
 
