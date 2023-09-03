@@ -9,7 +9,6 @@ public interface GlyphTypeGroup<T extends Enum<T>> extends StringRepresentable, 
     @NotNull
     GlyphType getGlyph();
 
-    @NotNull
     int getIndex();
 
     @Override
@@ -37,6 +36,6 @@ public interface GlyphTypeGroup<T extends Enum<T>> extends StringRepresentable, 
         }
 
         @Override
-        public @NotNull int getIndex() { return ordinal(); }
+        public int getIndex() { return ordinal(); }
     }
 }

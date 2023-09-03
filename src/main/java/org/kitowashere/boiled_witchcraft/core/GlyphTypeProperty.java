@@ -6,23 +6,25 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
-public class GlyphTypeProperty extends Property<GlyphType> {
-    public GlyphTypeProperty(String pName, Class<GlyphType> pClazz) {
+public class GlyphTypeProperty<T extends GlyphTypeGroup<T>> extends Property<T> {
+
+
+    protected GlyphTypeProperty(String pName, Class<T> pClazz) {
         super(pName, pClazz);
     }
 
     @Override
-    public @NotNull Collection<GlyphType> getPossibleValues() {
-        return GlyphType.getAllGlyphTypes();
+    public Collection<T> getPossibleValues() {
+        return null;
     }
 
     @Override
-    public @NotNull String getName(@NotNull GlyphType glyphType) {
-        return glyphType.name();
+    public String getName(T p_61696_) {
+        return null;
     }
 
     @Override
-    public @NotNull Optional<GlyphType> getValue(@NotNull String pValue) {
-        return Optional.ofNullable(GlyphType.fromString(pValue));
+    public Optional<T> getValue(String pValue) {
+        return Optional.empty();
     }
 }
