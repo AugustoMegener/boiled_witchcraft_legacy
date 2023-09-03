@@ -29,7 +29,7 @@ import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.GLY
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH_BLOCK;
 
 public class GlyphBlock extends Block implements EntityBlock {
-    public static final GlyphTypeProperty GLYPH = new GlyphTypeProperty("glyph", GlyphType.class);
+    public static final GlyphTypeProperty GLYPH = new GlyphTypeProperty("GLYPH", GlyphType.class);
 
 
     public GlyphBlock() {

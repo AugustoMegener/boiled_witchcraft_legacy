@@ -25,7 +25,7 @@ public class GlyphBlockEntity extends BlockEntity {
     public void load(@NotNull CompoundTag pTag) {
         super.load(pTag);
 
-        glyph = Objects.requireNonNull(GlyphType.fromString(pTag.getString("glyph")));
+        glyph = Objects.requireNonNull(GlyphType.fromString(pTag.getString("GLYPH")));
         magic = glyph.newMagic();
         magic.deserializeNBT((CompoundTag) pTag.get("context"));
     }
@@ -34,7 +34,7 @@ public class GlyphBlockEntity extends BlockEntity {
     protected void saveAdditional(@NotNull CompoundTag pTag) {
         super.saveAdditional(pTag);
 
-        pTag.putString("glyph", glyph.name());
+        pTag.putString("GLYPH", glyph.name());
         pTag.put("context", magic.serializeNBT());
     }
 

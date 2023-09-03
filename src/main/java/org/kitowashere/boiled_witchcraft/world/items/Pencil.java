@@ -100,7 +100,7 @@ public class Pencil extends Item  {
         BlockPos pos = context.getClickedPos().above();
 
         if (level.isEmptyBlock(pos) && level.getBlockState(context.getClickedPos()).isSolidRender(level, context.getClickedPos())) {
-            GlyphType glyph = GlyphType.fromString(nbt.getString("glyph"));
+            GlyphType glyph = GlyphType.fromString(nbt.getString("GLYPH"));
 
             BlockState glyphBlockState = GLYPH_BLOCK.get().defaultBlockState().setValue(GlyphBlock.GLYPH, glyph!=null ? glyph : FIRE_GLYPH);
 

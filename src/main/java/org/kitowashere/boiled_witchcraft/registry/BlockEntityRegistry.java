@@ -12,5 +12,5 @@ import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH_BLO
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 
-    public static final RegistryObject<BlockEntityType<GlyphBlockEntity>> GLYPH_BLOCK_ENTITY = BLOCK_ENTITIES.register("glyph", () -> BlockEntityType.Builder.of(GlyphBlockEntity::new, GLYPH_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<GlyphBlockEntity>> GLYPH_BLOCK_ENTITY = BLOCK_ENTITIES.register("GLYPH", () -> BlockEntityType.Builder.of(GlyphBlockEntity::new, GLYPH_BLOCK.get()).build(null));
 }

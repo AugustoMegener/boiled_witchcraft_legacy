@@ -29,12 +29,12 @@ public class PlayerGCTX {
     }
 
     public void saveNBTData(CompoundTag nbt) {
-        nbt.putString("glyph", selectedGlyph.name());
+        nbt.putString("GLYPH", selectedGlyph.name());
         nbt.put("contexts", magic.serializeNBT());
     }
 
     public void loadNBTData(CompoundTag nbt) {
-        GlyphType newGlyph = GlyphType.fromString(nbt.getString("glyph"));
+        GlyphType newGlyph = GlyphType.fromString(nbt.getString("GLYPH"));
 
         selectedGlyph = newGlyph!=null ? newGlyph : FIRE_GLYPH;
         magic = selectedGlyph.newMagic();
