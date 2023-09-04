@@ -1,4 +1,4 @@
-package org.kitowashere.boiled_witchcraft.core;
+package org.kitowashere.boiled_witchcraft.core.glyph.context;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;

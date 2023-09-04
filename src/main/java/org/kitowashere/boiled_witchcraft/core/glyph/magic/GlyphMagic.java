@@ -1,4 +1,4 @@
-package org.kitowashere.boiled_witchcraft.core;
+package org.kitowashere.boiled_witchcraft.core.glyph.magic;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.common.util.INBTSerializable;
+import org.kitowashere.boiled_witchcraft.core.glyph.context.GlyphContext;
 import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;

@@ -2,8 +2,8 @@ package org.kitowashere.boiled_witchcraft.world.player.capabilities.gctx;
 
 import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
-import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.core.GlyphType;
+import org.kitowashere.boiled_witchcraft.core.glyph.magic.GlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.GlyphType;
 
 import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.FIRE_GLYPH;
 
@@ -29,12 +29,12 @@ public class PlayerGCTX {
     }
 
     public void saveNBTData(CompoundTag nbt) {
-        nbt.putString("GLYPH", selectedGlyph.name());
+        nbt.putString("GLYPH_TYPES", selectedGlyph.name());
         nbt.put("contexts", magic.serializeNBT());
     }
 
     public void loadNBTData(CompoundTag nbt) {
-        GlyphType newGlyph = GlyphType.fromString(nbt.getString("GLYPH"));
+        GlyphType newGlyph = GlyphType.fromString(nbt.getString("GLYPH_TYPES"));
 
         selectedGlyph = newGlyph!=null ? newGlyph : FIRE_GLYPH;
         magic = selectedGlyph.newMagic();

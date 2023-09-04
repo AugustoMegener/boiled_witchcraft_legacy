@@ -19,19 +19,15 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.core.GlyphType;
-import org.kitowashere.boiled_witchcraft.core.GlyphTypeProperty;
+import org.kitowashere.boiled_witchcraft.core.glyph.magic.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.world.blocks.entities.GlyphBlockEntity;
 
 import static net.minecraft.core.Direction.UP;
+import static org.kitowashere.boiled_witchcraft.core.glyph.GlyphTypeProperty.PRIMAL;
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.GLYPH_BLOCK_ENTITY;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH_BLOCK;
 
 public class GlyphBlock extends Block implements EntityBlock {
-    public static final GlyphTypeProperty GLYPH = new GlyphTypeProperty("GLYPH", GlyphType.class);
-
-
     public GlyphBlock() {
         super(Properties.of(Material.AIR).requiresCorrectToolForDrops().noCollission().instabreak());
     }
@@ -56,7 +52,7 @@ public class GlyphBlock extends Block implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(GLYPH);
+        builder.add(PRIMAL);
 
         super.createBlockStateDefinition(builder);
     }

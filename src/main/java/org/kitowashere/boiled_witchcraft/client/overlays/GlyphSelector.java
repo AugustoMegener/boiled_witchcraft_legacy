@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import org.kitowashere.boiled_witchcraft.client.ClientGCTX;
-import org.kitowashere.boiled_witchcraft.core.GlyphContext;
+import org.kitowashere.boiled_witchcraft.core.glyph.context.GlyphContext;
 
 public class GlyphSelector {
     private static boolean enabled = false;
@@ -19,7 +19,7 @@ public class GlyphSelector {
 
             RenderSystem.setShader(GameRenderer::getPositionShader);
             RenderSystem.setShaderColor(1, 1, 1, 1);
-            RenderSystem.setShaderTexture(0, ClientGCTX.getSelectedGlyph().texture());
+            RenderSystem.setShaderTexture(0, ClientGCTX.getSelectedGlyph().texture);
 
             GuiComponent.blit(poseStack, 0, screenHeight / 3,
                     0, 0, 0, 32, 32, 32, 32

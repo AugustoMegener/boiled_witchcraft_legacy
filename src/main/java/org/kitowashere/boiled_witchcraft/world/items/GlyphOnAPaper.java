@@ -14,8 +14,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.core.GlyphType;
+import org.kitowashere.boiled_witchcraft.core.glyph.magic.GlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.GlyphType;
 
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class GlyphOnAPaper extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pUsedHand) {
         CompoundTag nbt = pPlayer.getItemInHand(pUsedHand).getTag();
 
-        if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("GLYPH")) {
-            GlyphType glyphType = GlyphType.fromIndex(nbt.getInt("GLYPH"));
+        if (!pLevel.isClientSide() && pPlayer.isShiftKeyDown() && nbt != null && nbt.contains("GLYPH_TYPES")) {
+            GlyphType glyphType = GlyphType.fromIndex(nbt.getInt("GLYPH_TYPES"));
 
             GlyphMagic magic = glyphType != null ? glyphType.newMagic() : FIRE_GLYPH.newMagic();
             magic.deserializeNBT((CompoundTag) nbt.get("contexts"));
@@ -53,8 +53,8 @@ public class GlyphOnAPaper extends Item {
 
             CompoundTag nbt =  pContext.getItemInHand().getTag();
 
-            if (level.getBlockState(pos).isSolidRender(level, pos) && nbt != null && nbt.contains("GLYPH") && GlyphType.fromIndex(nbt.getInt("GLYPH"))!=null) {
-                GlyphType glyphType = GlyphType.fromIndex(nbt.getInt("GLYPH"));
+            if (level.getBlockState(pos).isSolidRender(level, pos) && nbt != null && nbt.contains("GLYPH_TYPES") && GlyphType.fromIndex(nbt.getInt("GLYPH_TYPES"))!=null) {
+                GlyphType glyphType = GlyphType.fromIndex(nbt.getInt("GLYPH_TYPES"));
 
                 GlyphMagic magic = glyphType != null ? glyphType.newMagic() : FIRE_GLYPH.newMagic();
                 magic.deserializeNBT((CompoundTag) nbt.get("contexts"));
@@ -73,8 +73,8 @@ public class GlyphOnAPaper extends Item {
     public void appendHoverText(@NotNull ItemStack pStack, Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
-        if (pStack.getTag() != null && pStack.getTag().contains("GLYPH")) {
-            pTooltipComponents.add(1, Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("GLYPH")));
+        if (pStack.getTag() != null && pStack.getTag().contains("GLYPH_TYPES")) {
+            pTooltipComponents.add(1, Component.translatable(MODID + ".pencil.message." + pStack.getTag().getInt("GLYPH_TYPES")));
         }
     }
 }

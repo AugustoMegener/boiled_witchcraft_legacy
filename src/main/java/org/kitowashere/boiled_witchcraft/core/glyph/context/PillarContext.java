@@ -7,7 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
-import org.kitowashere.boiled_witchcraft.core.GlyphContext;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 

@@ -3,6 +3,7 @@ package org.kitowashere.boiled_witchcraft.world.items;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,8 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.kitowashere.boiled_witchcraft.client.ClientGCTX;
-import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
-import org.kitowashere.boiled_witchcraft.core.GlyphType;
+import org.kitowashere.boiled_witchcraft.core.glyph.magic.GlyphMagic;
+import org.kitowashere.boiled_witchcraft.core.glyph.GlyphType;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacket;
 import org.kitowashere.boiled_witchcraft.world.blocks.GlyphBlock;
@@ -28,8 +29,9 @@ import java.util.List;
 
 import static net.minecraft.world.InteractionHand.MAIN_HAND;
 import static net.minecraft.world.InteractionHand.OFF_HAND;
+import static org.kitowashere.boiled_witchcraft.core.glyph.GlyphType.GLYPH_REGISTRY;
+import static org.kitowashere.boiled_witchcraft.core.glyph.GlyphTypeProperty.PRIMAL;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.GLYPH_BLOCK;
-import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.FIRE_GLYPH;
 import static org.kitowashere.boiled_witchcraft.registry.ItemRegistry.GLYPH_ON_A_PAPER;
 
 public class Pencil extends Item  {
@@ -100,9 +102,9 @@ public class Pencil extends Item  {
         BlockPos pos = context.getClickedPos().above();
 
         if (level.isEmptyBlock(pos) && level.getBlockState(context.getClickedPos()).isSolidRender(level, context.getClickedPos())) {
-            GlyphType glyph = GlyphType.fromString(nbt.getString("GLYPH"));
+            GlyphType glyph = GLYPH_REGISTRY.getValue(ResourceLocation.of(nbt.getString("glyph"), ':'));
 
-            BlockState glyphBlockState = GLYPH_BLOCK.get().defaultBlockState().setValue(GlyphBlock.GLYPH, glyph!=null ? glyph : FIRE_GLYPH);
+            BlockState glyphBlockState = GLYPH_BLOCK.get().defaultBlockState().setValue(PRIMAL, glyph!=null ? glyph : PrimalGlyph.FIRE);
 
             level.setBlock(pos, glyphBlockState, 0);
             GlyphBlock.setGlyphCTX(level, pos, nbt);
