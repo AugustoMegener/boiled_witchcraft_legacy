@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "boiled_witchcraft:block/glyph/fire",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "boiled_witchcraft:block/glyph/fire",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "boiled_witchcraft:block/glyph/fire"
+    },
+    "facing=south": {
+      "model": "boiled_witchcraft:block/glyph/fire",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "boiled_witchcraft:block/glyph/fire",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "boiled_witchcraft:block/glyph/fire",
+      "y": 270
+    }
+  }
+}

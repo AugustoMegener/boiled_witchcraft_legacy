@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "boiled_witchcraft:block/glyph/ice",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "boiled_witchcraft:block/glyph/ice",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "boiled_witchcraft:block/glyph/ice"
+    },
+    "facing=south": {
+      "model": "boiled_witchcraft:block/glyph/ice",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "boiled_witchcraft:block/glyph/ice",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "boiled_witchcraft:block/glyph/ice",
+      "y": 270
+    }
+  }
+}

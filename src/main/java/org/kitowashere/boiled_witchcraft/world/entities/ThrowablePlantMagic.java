@@ -1,6 +1,5 @@
 package org.kitowashere.boiled_witchcraft.world.entities;
 
-import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -9,8 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-
-import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.PLANT_GLYPH;
 
 public class ThrowablePlantMagic extends ThrowableMagicEntity {
     public ThrowablePlantMagic(EntityType<ThrowableMagicEntity> pEntityType, Level pLevel) {
@@ -30,7 +27,7 @@ public class ThrowablePlantMagic extends ThrowableMagicEntity {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        PLANT_GLYPH.newMagic().applyOnSurface(level, pResult.getBlockPos().above(), Direction.UP);
+        getMagic().ifPresent(glyphMagic -> glyphMagic.applyOnSurface(level, pResult.getBlockPos().mutable().move(pResult.getDirection()), pResult.getDirection()));
         this.discard();
     }
 }

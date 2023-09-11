@@ -9,14 +9,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.kitowashere.boiled_witchcraft.core.GlyphContext;
+import org.kitowashere.boiled_witchcraft.core.glyph.context.GlyphContext;
 import org.kitowashere.boiled_witchcraft.core.glyph.context.PillarContext;
 import org.kitowashere.boiled_witchcraft.world.blocks.SurfacedFireMagic;
-import org.kitowashere.boiled_witchcraft.core.GlyphMagic;
 import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPM;
-import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TLM;
+import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.TPM;
 
 public class PlantGlyphMagic extends GlyphMagic {
     @Override
@@ -38,7 +37,7 @@ public class PlantGlyphMagic extends GlyphMagic {
 
     @Override
     public void useOnPaper(ServerLevel level, LivingEntity shooter, float vel) {
-        ThrowableMagicEntity projectile = TLM.get().create(level);
+        ThrowableMagicEntity projectile = TPM.get().create(level);
 
         if (projectile != null) {
             shootProjectile(projectile, level, shooter, vel);

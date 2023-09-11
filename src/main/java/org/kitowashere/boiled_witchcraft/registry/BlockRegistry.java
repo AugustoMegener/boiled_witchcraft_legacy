@@ -11,7 +11,10 @@ import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 
-    public static final RegistryObject<Block> GLYPH_BLOCK = BLOCKS.register("glyph_block", GlyphBlock::new);
+    public static final RegistryObject<Block> FIRE_GLYPH_BLOCK = BLOCKS.register("fire_glyph_block", GlyphBlock::new);
+    public static final RegistryObject<Block> ICE_GLYPH_BLOCK = BLOCKS.register("ice_glyph_block", GlyphBlock::new);
+    public static final RegistryObject<Block> LIGHT_GLYPH_BLOCK = BLOCKS.register("light_glyph_block", GlyphBlock::new);
+    public static final RegistryObject<Block> PLANT_GLYPH_BLOCK = BLOCKS.register("plant_glyph_block", GlyphBlock::new);
 
     public static final RegistryObject<Block> SFM = BLOCKS.register("surfaced_fire_magic", SurfacedFireMagic::new);
 

@@ -1,7 +1,82 @@
 {
   "variants": {
-    "level=0": { "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom" },
-    "level=1": { "model": "boiled_witchcraft:block/surfaced_magic/plant/middle" },
-    "level=2": { "model": "boiled_witchcraft:block/surfaced_magic/plant/top" }
+    "facing=down,level=0": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom",
+      "x": 180
+    },
+    "facing=east,level=0": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,level=0": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom",
+      "x": 90
+    },
+    "facing=south,level=0": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,level=0": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom"
+    },
+    "facing=west,level=0": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/bottom",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,level=1": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/middle",
+      "x": 180
+    },
+    "facing=east,level=1": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/middle",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,level=1": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/middle",
+      "x": 90
+    },
+    "facing=south,level=1": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/middle",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,level=1": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/middle"
+    },
+    "facing=west,level=1": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/middle",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,level=2": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/top",
+      "x": 180
+    },
+    "facing=east,level=2": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/top",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,level=2": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/top",
+      "x": 90
+    },
+    "facing=south,level=2": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/top",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,level=2": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/top"
+    },
+    "facing=west,level=2": {
+      "model": "boiled_witchcraft:block/surfaced_magic/plant/top",
+      "x": 90,
+      "y": 270
+    }
   }
 }

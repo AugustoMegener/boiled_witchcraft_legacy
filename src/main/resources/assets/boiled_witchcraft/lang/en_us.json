@@ -2,13 +2,21 @@
   "item.boiled_witchcraft.pencil": "Pencil",
   "item.boiled_witchcraft.glyph_paper": "Glyph On a Paper",
 
-  "boiled_witchcraft.glyph_type.fire": "Fire glyph",
-  "boiled_witchcraft.glyph_type.ice": "Ice glyph",
-  "boiled_witchcraft.glyph_type.light": "Light glyph",
-  "boiled_witchcraft.glyph_type.plant": "Plant glyph",
+  "glyph.boiled_witchcraft.fire_glyph": "Fire glyph",
+  "glyph.boiled_witchcraft.ice_glyph": "Ice glyph",
+  "glyph.boiled_witchcraft.light_glyph": "Light glyph",
+  "glyph.boiled_witchcraft.plant_glyph": "Plant glyph",
 
   "block.boiled_witchcraft.glyph": "Glyph",
   "block.boiled_witchcraft.grounded_fire_magic": "Fire Magic",
   "block.boiled_witchcraft.grounded_ice_magic": "Ice Magic",
-  "block.boiled_witchcraft.spark": "Spark"
+  "block.boiled_witchcraft.spark": "Spark",
+
+  "contexts.boiled_witchcraft.pillar": "Pillar",
+  "contexts.boiled_witchcraft.suspended_block": "Suspended Block ",
+
+  "key.category.boiled_witchcraft.glyph_config": "Glyph Configuration",
+  "key.boiled_witchcraft.config_magic.up": "Configure Magic (Up)",
+  "key.boiled_witchcraft.config_magic.down": "Configure Magic (Down)",
+  "key.boiled_witchcraft.wrap_glyph": "Wrap Glyph"
 }

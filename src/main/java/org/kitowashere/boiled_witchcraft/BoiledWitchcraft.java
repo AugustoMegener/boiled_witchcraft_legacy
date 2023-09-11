@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 
+import static org.kitowashere.boiled_witchcraft.registry.GlyphTypeRegistry.GLYPH_TYPES;
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.BLOCK_ENTITIES;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.BLOCKS;
 import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.ENTITIES;
@@ -21,6 +22,8 @@ public class BoiledWitchcraft {
 
     public BoiledWitchcraft() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        GLYPH_TYPES.register(modEventBus);
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);

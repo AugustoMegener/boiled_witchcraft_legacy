@@ -1,24 +1,25 @@
 package org.kitowashere.boiled_witchcraft.event;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-
-import static net.minecraft.world.InteractionHand.MAIN_HAND;
-import static net.minecraft.world.InteractionHand.OFF_HAND;
-import static net.minecraftforge.event.TickEvent.Phase.START;
-
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.kitowashere.boiled_witchcraft.client.overlays.GlyphSelector;
+import org.kitowashere.boiled_witchcraft.networking.ModMessages;
+import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacketS2C;
 import org.kitowashere.boiled_witchcraft.world.items.Pencil;
 import org.kitowashere.boiled_witchcraft.world.player.capabilities.gctx.PlayerGCTXProvider;
 
+import static net.minecraft.world.InteractionHand.MAIN_HAND;
+import static net.minecraft.world.InteractionHand.OFF_HAND;
+import static net.minecraftforge.event.TickEvent.Phase.START;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID)
@@ -36,7 +37,10 @@ public class ModEvent {
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         event.getOriginal().getCapability(PlayerGCTXProvider.PLAYER_CONTEXT).ifPresent(
             oldStore -> event.getOriginal().getCapability(PlayerGCTXProvider.PLAYER_CONTEXT).ifPresent(
-                    newStore -> newStore.copyFrom(oldStore)
+                    newStore -> {
+                        newStore.copyFrom(oldStore);
+                        ModMessages.sendToPlayer(new GCTXPacketS2C(oldStore.getSelectedGlyph(), oldStore.getGlyphMagic()), (ServerPlayer) event.getEntity());
+                    }
             )
         );
     }
