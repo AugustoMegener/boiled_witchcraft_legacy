@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "boiled_witchcraft:block/glyph/plant",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "boiled_witchcraft:block/glyph/plant",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "boiled_witchcraft:block/glyph/plant"
+    },
+    "facing=south": {
+      "model": "boiled_witchcraft:block/glyph/plant",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "boiled_witchcraft:block/glyph/plant",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "boiled_witchcraft:block/glyph/plant",
+      "y": 270
+    }
+  }
+}

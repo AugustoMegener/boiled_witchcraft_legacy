@@ -16,6 +16,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+
 public class SurfacedFireMagic extends BaseFireBlock {
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 2);
 
@@ -25,7 +27,7 @@ public class SurfacedFireMagic extends BaseFireBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LEVEL);
+        builder.add(FACING, LEVEL);
 
         super.createBlockStateDefinition(builder);
     }
@@ -33,7 +35,7 @@ public class SurfacedFireMagic extends BaseFireBlock {
     @Override
     public void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Entity entity) {
         entity.setRemainingFireTicks(1200);
-        entity.moveRelative(0.5F, new Vec3(0.0F, 0.5F, 0.0F));
+        entity.moveRelative(0.5F, Vec3.atLowerCornerOf(state.getValue(FACING).getNormal().multiply(5)));
 
         super.entityInside(state, level, pos, entity);
     }

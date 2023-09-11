@@ -1,5 +1,30 @@
 {
   "variants": {
-    "": { "model": "boiled_witchcraft:block/surfaced_magic/ice/block" }
+    "facing=down": {
+      "model": "boiled_witchcraft:block/surfaced_magic/ice/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "boiled_witchcraft:block/surfaced_magic/ice/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "boiled_witchcraft:block/surfaced_magic/ice/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "boiled_witchcraft:block/surfaced_magic/ice/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "boiled_witchcraft:block/surfaced_magic/ice/block"
+    },
+    "facing=west": {
+      "model": "boiled_witchcraft:block/surfaced_magic/ice/block",
+      "x": 90,
+      "y": 270
+    }
   }
 }

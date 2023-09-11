@@ -16,6 +16,7 @@ import org.kitowashere.boiled_witchcraft.core.glyph.context.GlyphContext;
 import org.kitowashere.boiled_witchcraft.world.entities.ThrowableMagicEntity;
 
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
 public abstract class GlyphMagic implements INBTSerializable<CompoundTag> {
     public final GlyphContext[] CONTEXT_KIT;
@@ -60,7 +61,7 @@ public abstract class GlyphMagic implements INBTSerializable<CompoundTag> {
         BlockPos.MutableBlockPos blockPos = pos.mutable();
 
         for (int i = 0; i < range; i++) {
-            level.setBlock(blockPos, block.defaultBlockState(), UPDATE_ALL);
+            level.setBlock(blockPos, block.defaultBlockState().setValue(FACING, surface), UPDATE_ALL);
             blockPos.move(surface);
         }
     }
@@ -69,17 +70,19 @@ public abstract class GlyphMagic implements INBTSerializable<CompoundTag> {
         BlockPos.MutableBlockPos blockPos = pos.mutable();
 
         for (int i = 0; i < range-transitionRange; i++) {
-            level.setBlock(blockPos, block.defaultBlockState().setValue(transitionProperty, 0), UPDATE_ALL);
+            level.setBlock(blockPos, block.defaultBlockState().setValue(FACING, surface).setValue(transitionProperty, 0), UPDATE_ALL);
             blockPos.move(surface);
         }
 
-        for (int i = 0; i < transitionRange; i++) {
-            level.setBlock(blockPos, block.defaultBlockState().setValue(transitionProperty, i), UPDATE_ALL);
+        for (int i =  Math.max(transitionRange-range, 0); i < transitionRange; i++) {
+            level.setBlock(blockPos, block.defaultBlockState().setValue(FACING, surface).setValue(transitionProperty, i), UPDATE_ALL);
             blockPos.move(surface);
         }
     }
 
     protected void shootProjectile(ThrowableMagicEntity projectile, ServerLevel level, LivingEntity shooter, float vel) {
+        projectile.setMagic(this);
+
         projectile.setPos(shooter.getX(), shooter.getEyeY() - (double)0.1F, shooter.getZ());
         projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, vel, 1.0F);
 

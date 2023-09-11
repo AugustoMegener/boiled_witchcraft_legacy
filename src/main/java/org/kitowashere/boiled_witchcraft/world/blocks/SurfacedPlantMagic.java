@@ -14,6 +14,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+
 public class SurfacedPlantMagic extends Block {
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 2);
 
@@ -23,7 +25,7 @@ public class SurfacedPlantMagic extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LEVEL);
+        builder.add(FACING, LEVEL);
 
         super.createBlockStateDefinition(builder);
     }

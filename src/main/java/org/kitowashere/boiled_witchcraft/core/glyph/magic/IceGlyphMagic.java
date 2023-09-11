@@ -3,6 +3,7 @@ package org.kitowashere.boiled_witchcraft.core.glyph.magic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -22,7 +23,13 @@ public class IceGlyphMagic extends GlyphMagic {
 
     @Override
     public void glyphTouched(BlockState state, Level level, BlockPos pos, Entity entity, Direction surface) {
-        entity.moveTo(pos.mutable().move(surface, 4), entity.getYRot(), entity.getXRot());
+        BlockPos.MutableBlockPos newPos = pos.mutable().move( surface, ((PillarContext) CONTEXT_KIT[0]).getHeight()+1);
+
+        if (entity instanceof ServerPlayer) {
+            ((ServerPlayer) entity).connection.teleport(newPos.getX(), newPos.getY(), newPos.getZ(), entity.getYRot(), entity.getXRot());
+        } else {
+            entity.moveTo(newPos, entity.getYRot(), entity.getXRot());
+        }
     }
 
     @Override

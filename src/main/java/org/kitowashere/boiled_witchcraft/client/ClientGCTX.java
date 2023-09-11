@@ -12,6 +12,6 @@ public class ClientGCTX {
     public static void setSelectedGlyph(GlyphType newGlyph) { selectedGlyph = newGlyph; }
     public static GlyphType getSelectedGlyph() { return selectedGlyph; }
 
-    public static void setMagic(GlyphMagic newContexts) { context_set = newContexts;}
-    public static GlyphMagic getMagic() { return context_set; }
+    public static void setGlyphMagic(GlyphMagic newContexts) { context_set = newContexts;}
+    public static GlyphMagic getGlyphMagic() { return context_set; }
 }
