@@ -1,6 +1,6 @@
 <h1 align="center"><img src="https://i.imgur.com/q2TflA2.png" alt="Logo" width="400"></h1>
 
-A mod that brings the magic system from the acclaimed show The Owl House! Use glyphs and (in the future) much more directly from the boiling islands!
+Welcome to Boiled Witchcraft! A magic mod with a different and original approach, inspired by the acclaimed cartoon The Owl House. It is currently under intensive development, although there is little content, there will still be many, many future content additions!
 
 ## Actual features
 
@@ -8,7 +8,10 @@ A mod that brings the magic system from the acclaimed show The Owl House! Use gl
 Right-clicking on blocks with the new Pencil item in hand will make a glyph on the ground, clicking or stepping it will execute the magic. (See the "Applied on block" on the table above.)
 
 ### Glyphs on papers
-You can also create glyphs on papers that you can apply on blocks and use on air to throw a projectile. (See the "Used on paper" on the table above".)
+You can also create glyphs on papers that you can apply on blocks and use on air to throw a projectile. (See the "Used on paper" on the table above.)
+
+### Glyph settings
+You can wrap the glyph to use with `tab`, you can use arrow `up`/`down` to configurate the glyph behavior, at the moment, only the magic pillar height. (You can change the keys on keybinds menu.)
 
 ## Actual glyphs and it's magics
 |Glyph|Applied on block|Used on paper|
@@ -18,11 +21,12 @@ You can also create glyphs on papers that you can apply on blocks and use on air
 | **Light**|Create a light bulb above the glyph that's a great light source. |Throw a spark, put 30 seconds of blindness on hitted entities. |
 |**Plant**|Create a 3 blocks tall magic plant that stuck entities that touch and it's very hard to break.|Throw a magic flower, put 30 seconds of poisoning on hitted entities. Also apply on hitted blocks.|
 
-## Magics
-![All glyph pillars](http://i.imgur.com/NlHfDUG.png)
+## Sneak peak of the next version
+One of the main things that needs to be added to the mode is a spell cost system, only then would it be viable as a mod that you would actually play in survival mode, in the show that the mod was inspired by, the magic comes from titan blood, and so it will be here too, you will have to find crystals of diluted titan blood, you will have to extract, distill and spray it in the air, so that the glyphs can absorb the magic from the air. (This doesn't rule out the baby titan idea mentioned below, this will be implemented in the future, I'm still learning how to develop mods and it's outside my skillbound at the moment)
+
+I want to transform the project into a technical magic mod, something like botania or thaumcraft, with several automation and progression systems, as this style of mod is my favorite and I think it is a little lacking in modern versions.
 
 ## Planned features 
-* UI system.
 * Titan blood consumption system.
 * Large glyphs.
 * Glyp combinations.
