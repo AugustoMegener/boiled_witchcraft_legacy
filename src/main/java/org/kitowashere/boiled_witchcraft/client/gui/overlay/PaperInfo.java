@@ -1,4 +1,4 @@
-package org.kitowashere.boiled_witchcraft.client.overlays;
+package org.kitowashere.boiled_witchcraft.client.gui.overlay;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;

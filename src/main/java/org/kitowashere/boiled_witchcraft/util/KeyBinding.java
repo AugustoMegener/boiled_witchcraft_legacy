@@ -21,6 +21,6 @@ public class KeyBinding {
             KEY_CONFIG_MAGIC_DOWN, KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_DOWN, KEY_CATEGORY_GLYPH_CONFIG
     );
     public static final KeyMapping WRAP_GLYPH_KEY = new KeyMapping(
-            KEY_CONFIG_WRAP_GLYPH, KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_TAB, KEY_CATEGORY_GLYPH_CONFIG
+            KEY_CONFIG_WRAP_GLYPH, KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_APOSTROPHE, KEY_CATEGORY_GLYPH_CONFIG
     );
 }

@@ -11,7 +11,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.kitowashere.boiled_witchcraft.client.overlays.GlyphSelector;
+import org.kitowashere.boiled_witchcraft.client.gui.overlay.GlyphSelector;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacketS2C;
 import org.kitowashere.boiled_witchcraft.world.items.Pencil;
@@ -24,6 +24,7 @@ import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID)
 public class ModEvent {
+
     @SubscribeEvent
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {

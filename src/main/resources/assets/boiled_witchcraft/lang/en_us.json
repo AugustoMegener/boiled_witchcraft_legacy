@@ -1,6 +1,11 @@
 {
   "item.boiled_witchcraft.pencil": "Pencil",
   "item.boiled_witchcraft.glyph_paper": "Glyph On a Paper",
+  "item.boiled_witchcraft.copper_gold_ingots": "Copper 'n' Gold Ingots",
+  "item.boiled_witchcraft.royal_bronze_ingot": "Royal Bronze Ingot",
+  "item.boiled_witchcraft.diluted_titan_blood_bucket": "Diluted Titan Blood Bucket",
+  "item.boiled_witchcraft.pipe": "Pipe",
+  "item.boiled_witchcraft.tank": "Tank",
 
   "glyph.boiled_witchcraft.fire_glyph": "Fire glyph",
   "glyph.boiled_witchcraft.ice_glyph": "Ice glyph",
@@ -11,9 +16,10 @@
   "block.boiled_witchcraft.grounded_fire_magic": "Fire Magic",
   "block.boiled_witchcraft.grounded_ice_magic": "Ice Magic",
   "block.boiled_witchcraft.spark": "Spark",
+  "block.boiled_witchcraft.sprayer": "Sprayer",
 
   "contexts.boiled_witchcraft.pillar": "Pillar",
-  "contexts.boiled_witchcraft.suspended_block": "Suspended Block ",
+  "contexts.boiled_witchcraft.suspended_block": "Suspended Block",
 
   "key.category.boiled_witchcraft.glyph_config": "Glyph Configuration",
   "key.boiled_witchcraft.config_magic.up": "Configure Magic (Up)",

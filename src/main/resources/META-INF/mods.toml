@@ -23,7 +23,7 @@ version="${file.jarVersion}" #mandatory
 # A display name for the mod
 displayName="boiled_witchcraft" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
-updateJSONURL="https://github.com/AugustoMegener/boiled_witchcraft" #optional
+#updateJSONURL="https://github.com/AugustoMegener/boiled_witchcraft" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/AugustoMegener/boiled_witchcraft" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
