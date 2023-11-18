@@ -12,7 +12,7 @@ import org.kitowashere.boiled_witchcraft.client.gui.menu.SprayerMenu;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
 public class SprayerScreen extends AbstractContainerScreen<SprayerMenu> {
-    private static final ResourceLocation SPRAYER_STAND_LOCATION = new ResourceLocation(MODID,"textures/gui/sprayer.png");
+    private static final ResourceLocation SPRAYER_LOCATION = new ResourceLocation(MODID,"textures/gui/sprayer.png");
     public SprayerScreen(SprayerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -25,7 +25,7 @@ public class SprayerScreen extends AbstractContainerScreen<SprayerMenu> {
 
     @Override
     protected void renderBg(@NotNull PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShaderTexture(0, SPRAYER_STAND_LOCATION);
+        RenderSystem.setShaderTexture(0, SPRAYER_LOCATION);
         blit(pPoseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 }
