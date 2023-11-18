@@ -21,7 +21,7 @@ import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
 import org.kitowashere.boiled_witchcraft.client.renderer.ThrowableMagicRenderer;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
-import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.*;
+import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPRAYER_ITEM;
 import static org.kitowashere.boiled_witchcraft.registry.EntityRegistry.*;
 import static org.kitowashere.boiled_witchcraft.registry.FluidRegistry.FLOWING_DTB;
 import static org.kitowashere.boiled_witchcraft.registry.FluidRegistry.SOURCE_DTB;
@@ -34,10 +34,12 @@ public class ModBusEvent {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(SOURCE_DTB.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(FLOWING_DTB.get(), RenderType.translucent());
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(SOURCE_DTB.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FLOWING_DTB.get(), RenderType.translucent());
 
-        event.enqueueWork(() -> MenuScreens.register(SPRAYER_MENU.get(), SprayerScreen::new));
+            MenuScreens.register(SPRAYER_MENU.get(), SprayerScreen::new);
+        });
     }
 
     @SubscribeEvent

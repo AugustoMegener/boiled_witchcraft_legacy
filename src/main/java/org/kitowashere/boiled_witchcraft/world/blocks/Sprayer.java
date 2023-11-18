@@ -35,8 +35,8 @@ public class Sprayer extends Block implements EntityBlock {
         @NotNull BlockState pState, @NotNull Level pLevel,          @NotNull BlockPos pPos,
         @NotNull Player pPlayer,    @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit)
     {
-        if (pLevel.getBlockEntity(pPos) instanceof SprayerBlockEntity tankEntity && pPlayer instanceof ServerPlayer player) {
-            NetworkHooks.openScreen(player, tankEntity);
+        if (pLevel.getBlockEntity(pPos) instanceof SprayerBlockEntity blockEntity && pPlayer instanceof ServerPlayer player) {
+            NetworkHooks.openScreen(player, blockEntity, pPos);
         }
 
         return InteractionResult.SUCCESS;

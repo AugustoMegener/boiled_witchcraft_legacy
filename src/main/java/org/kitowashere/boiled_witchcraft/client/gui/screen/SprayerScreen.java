@@ -15,15 +15,17 @@ public class SprayerScreen extends AbstractContainerScreen<SprayerMenu> {
     private static final ResourceLocation SPRAYER_STAND_LOCATION = new ResourceLocation(MODID,"textures/gui/sprayer.png");
     public SprayerScreen(SprayerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
+    }
 
-        addWidget(new FluidDisplayWidget(9, 10, 14, 67, pMenu.tankHandler));
+    @Override
+    protected void init() {
+        super.init();
+        addRenderableWidget(new FluidDisplayWidget(leftPos + 10, topPos + 19, 13, 49, menu.tankHandler));
     }
 
     @Override
     protected void renderBg(@NotNull PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShaderTexture(0, SPRAYER_STAND_LOCATION);
-        int i = (this.width - this.imageWidth) / 2;
-        int j = (this.height - this.imageHeight) / 2;
-        blit(pPoseStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        blit(pPoseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 }

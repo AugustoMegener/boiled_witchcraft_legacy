@@ -12,8 +12,6 @@ import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.kitowashere.boiled_witchcraft.world.blocks.entities.SprayerBlockEntity;
 
-import java.util.Objects;
-
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.FLUID_HANDLER;
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPRAYER;
@@ -26,8 +24,8 @@ public class SprayerMenu extends AbstractContainerMenu {
     public Slot bucketSlot;
     public IFluidHandler tankHandler;
 
-    public SprayerMenu(int pContainerId, Inventory inv, FriendlyByteBuf buf) {
-        this(pContainerId, inv, Objects.requireNonNull((SprayerBlockEntity) inv.player.level.getBlockEntity(buf.readBlockPos())));
+    public SprayerMenu(int pContainerId, Inventory inv, @NotNull FriendlyByteBuf buf) {
+        this(pContainerId, inv, (SprayerBlockEntity) inv.player.level.getBlockEntity(buf.readBlockPos()));
     }
     public SprayerMenu(int pContainerId, Inventory inv, SprayerBlockEntity blockEntity) {
         super(SPRAYER_MENU.get(), pContainerId);
@@ -43,7 +41,7 @@ public class SprayerMenu extends AbstractContainerMenu {
 
     private void createContainer(SprayerBlockEntity be) {
         be.getCapability(ITEM_HANDLER).ifPresent(iItemHandler ->
-            bucketSlot = addSlot(new SlotItemHandler(iItemHandler, 0, 43, 61))
+            bucketSlot = addSlot(new SlotItemHandler(iItemHandler, 0, 44, 53))
         );
         be.getCapability(FLUID_HANDLER).ifPresent(iFluidHandler ->
             tankHandler = iFluidHandler
