@@ -12,5 +12,5 @@ import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 public class MenuTypeRegistry {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MODID);
 
-    public static final RegistryObject<MenuType<SprayerMenu>> SPRAYER_MENU = MENUS.register("tank_menu", () -> IForgeMenuType.create(SprayerMenu::new));
+    public static final RegistryObject<MenuType<SprayerMenu>> SPRAYER_MENU = MENUS.register("tank_menu", () -> IForgeMenuType.create((pContainerId, inv, buf) -> new SprayerMenu(pContainerId, inv, buf, data)));
 }

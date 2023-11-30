@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.kitowashere.boiled_witchcraft.client.gui.overlay.GlyphSelector;
 import org.kitowashere.boiled_witchcraft.client.gui.overlay.PaperInfo;
+import org.kitowashere.boiled_witchcraft.client.gui.overlay.TitanBloodTokens;
 import org.kitowashere.boiled_witchcraft.client.gui.screen.SprayerScreen;
 import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
 import org.kitowashere.boiled_witchcraft.client.renderer.ThrowableMagicRenderer;
@@ -35,8 +36,8 @@ public class ModBusEvent {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemBlockRenderTypes.setRenderLayer(SOURCE_DTB.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FLOWING_DTB.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(SOURCE_DTB.get(),   RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FLOWING_DTB.get(),  RenderType.translucent());
 
             MenuScreens.register(SPRAYER_MENU.get(), SprayerScreen::new);
         });
@@ -50,30 +51,39 @@ public class ModBusEvent {
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(
-                TFM.get(),
-                pContext -> new ThrowableMagicRenderer<>(pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/fire.png"))
+            TFM.get(),
+            pContext -> new ThrowableMagicRenderer<>(
+                pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/fire.png")
+            )
         );
 
         event.registerEntityRenderer(
-                TIM.get(),
-                pContext -> new ThrowableMagicRenderer<>(pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/ice.png"))
+            TIM.get(),
+            pContext -> new ThrowableMagicRenderer<>(
+                pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/ice.png")
+            )
         );
 
         event.registerEntityRenderer(
-                TLM.get(),
-                pContext -> new ThrowableMagicRenderer<>(pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/light.png"))
+            TLM.get(),
+            pContext -> new ThrowableMagicRenderer<>(
+                pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/light.png")
+            )
         );
 
         event.registerEntityRenderer(
-                TPM.get(),
-                pContext -> new ThrowableMagicRenderer<>(pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/plant.png"))
+            TPM.get(),
+            pContext -> new ThrowableMagicRenderer<>(
+                pContext, new ResourceLocation(MODID, "textures/entity/throwable_magic/plant.png")
+            )
         );
     }
 
     @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerAboveAll("glyph_selector", GlyphSelector::render);
-        event.registerAboveAll("glyph_paper_info", PaperInfo::render);
+        event.registerAboveAll("glyph_selector",        GlyphSelector::render);
+        event.registerAboveAll("glyph_paper_info",          PaperInfo::render);
+        event.registerAboveAll("titan_blood_tokens", TitanBloodTokens::render);
     }
 
     @SubscribeEvent
@@ -87,18 +97,16 @@ public class ModBusEvent {
     @SubscribeEvent
     public static void creativeModeTabRegister(CreativeModeTabEvent.Register event) {
         MAIN_TAB = event.registerCreativeModeTab(
-            new ResourceLocation(MODID, "main_tab"),
-            builder -> builder
-                    .icon(GLYPH_ON_A_PAPER.get()::getDefaultInstance)
-                    .title(Component.literal("Boiled Witchcraft"))
-                    .displayItems(((pParameters, pOutput) -> {
-                        pOutput.accept(PENCIL.get().getDefaultInstance());
-                        pOutput.accept(COPPER_N_GOLD_INGOTS.get().getDefaultInstance());
-                        pOutput.accept(ROYAL_BRONZE_INGOT.get().getDefaultInstance());
-                        pOutput.accept(SPRAYER_ITEM.get().getDefaultInstance());
-                    }
-                )
-            )
-        );
+        new ResourceLocation(MODID, "main_tab"),            builder -> builder
+                .icon(GLYPH_ON_A_PAPER.get()::getDefaultInstance)
+                .title(Component.literal("Boiled Witchcraft"))
+
+                .displayItems(((pParameters, pOutput) -> {
+                    pOutput.accept(PENCIL               .get().getDefaultInstance());
+                    pOutput.accept(COPPER_N_GOLD_INGOTS .get().getDefaultInstance());
+                    pOutput.accept(ROYAL_BRONZE_INGOT   .get().getDefaultInstance());
+                    pOutput.accept(SPRAYER_ITEM         .get().getDefaultInstance());
+                    pOutput.accept(DTB_BUCKET           .get().getDefaultInstance());
+        })));
     }
 }

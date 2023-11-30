@@ -7,9 +7,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
@@ -22,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.kitowashere.boiled_witchcraft.world.blocks.entities.SprayerBlockEntity;
 
-public class Sprayer extends Block implements EntityBlock {
+public class Sprayer extends BaseEntityBlock {
     public Sprayer() { super(Properties.of(Material.METAL)); }
 
     @Nullable @Override
@@ -54,5 +56,17 @@ public class Sprayer extends Block implements EntityBlock {
         shape = Shapes.join(shape, Shapes.box(0.3125, 0.625, 0.3125, 0.6875, 1, 0.6875), BooleanOp.OR);
 
         return shape;
+    }
+
+    @Nullable
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level pLevel, BlockEntityType<T> pServerType, BlockEntityType<? extends SprayerBlockEntity> pClientType) {
+        return pLevel.isClientSide ? null : createTickerHelper(pServerType, pClientType, SprayerBlockEntity::serverTick);
+
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, pBlockEntityType, SprayerBlockEntity::serverTick);
     }
 }
