@@ -80,7 +80,7 @@ public class SprayerMenu extends AbstractContainerMenu {
     }
 
     public void trySpray() {
-        if (blockEntity.canSpray() && data.get(1) <= 0) {
+        if (blockEntity.canSpray() && data.get(0) <= 0) {
             data.set(0, COOLDOWN_TIME);
 
             blockEntity.spray();

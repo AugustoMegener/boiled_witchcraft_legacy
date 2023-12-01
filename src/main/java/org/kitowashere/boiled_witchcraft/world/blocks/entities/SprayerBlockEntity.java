@@ -32,8 +32,8 @@ import static net.minecraft.world.item.Items.BUCKET;
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER;
 import static net.minecraftforge.fluids.FluidType.BUCKET_VOLUME;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
+import static org.kitowashere.boiled_witchcraft.data.server.FBDResourceReloadListener.getFluidDensity;
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.SPRAYER_BLOCK_ENTITY;
-import static org.kitowashere.boiled_witchcraft.util.ModTags.Fluids.FLUID_DB;
 import static org.kitowashere.boiled_witchcraft.core.blood.BloodDensityProvider.TITAN_BLOOD_HANDLER;
 
 public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuProvider {
@@ -45,7 +45,7 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
         public void setStackInSlot(int slot, @NotNull ItemStack stack) {
             super.setStackInSlot(slot, stack);
             if (
-                stack.getItem() instanceof BucketItem bucket && bucket.getFluid().is(FLUID_DB)
+                stack.getItem() instanceof BucketItem bucket && getFluidDensity(bucket.getFluid()) != 0
             ) {
                 if (
                     tank.fill(new FluidStack(bucket.getFluid(), BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE) > 0
@@ -123,8 +123,8 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
                 level.getChunkAt(getBlockPos()).getCapability(TITAN_BLOOD_HANDLER);
 
             capability.ifPresent(handler -> {
-                handler.add(100);
-                tank.drain(BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+                handler.add((int) (tank.getFluidAmount() * getFluidDensity(tank.getFluid())));
+                tank.drain(tank.getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
             });
         }
 
