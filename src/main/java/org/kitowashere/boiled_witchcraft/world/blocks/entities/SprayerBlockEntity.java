@@ -39,6 +39,7 @@ import static org.kitowashere.boiled_witchcraft.core.blood.BloodDensityProvider.
 public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuProvider {
 
     private int cooldown;
+    private int range;
 
     public ItemStackHandler bucketSlot = new ItemStackHandler() {
         @Override
@@ -59,6 +60,7 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
         public int get(int pIndex) {
             return switch (pIndex) {
                 case 0 -> cooldown;
+                case 1 -> range;
                 default -> 0;
             };
         }
@@ -66,14 +68,15 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
         @Override
         public void set(int pIndex, int pValue) {
             switch (pIndex) {
-                case 1 -> cooldown = pValue;
+                case 0 -> cooldown = pValue;
+                case 1 -> range = pValue;
                 default -> {}
             }
         }
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
     };
 
@@ -84,14 +87,16 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
 
     @Override
     public void load(CompoundTag tag) {
-        super.load(tag);
+        super.load(tag.getCompound("tank"));
         bucketSlot.deserializeNBT(tag.getCompound("inventory"));
+        range = tag.getInt("range");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+        super.saveAdditional(tag.getCompound("tank"));
         tag.put("inventory", bucketSlot.serializeNBT());
+        tag.putInt("range", range);
     }
 
     @Override
@@ -138,5 +143,9 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
 
             if (data.get(0) > 0) data.set(0, data.get(0) - 1);
         }
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-      "item": "minecraft:copper_gold_ingots"
+      "item": "boiled_witchcraft:copper_gold_ingots"
   },
   "result": "boiled_witchcraft:royal_bronze_ingot",
   "experience": 0.7,

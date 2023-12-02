@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -37,11 +38,18 @@ public class Sprayer extends BaseEntityBlock {
         @NotNull BlockState pState, @NotNull Level pLevel,          @NotNull BlockPos pPos,
         @NotNull Player pPlayer,    @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit)
     {
-        if (pLevel.getBlockEntity(pPos) instanceof SprayerBlockEntity blockEntity && pPlayer instanceof ServerPlayer player) {
-            NetworkHooks.openScreen(player, blockEntity, pPos);
+        MenuProvider menu = getMenuProvider(pState, pLevel, pPos);
+
+        if (pPlayer instanceof ServerPlayer player && menu != null) {
+            NetworkHooks.openScreen(player, menu, pPos);
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public RenderShape getRenderShape(@NotNull BlockState pState) {
+        return RenderShape.MODEL;
     }
 
     @Override

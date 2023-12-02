@@ -62,4 +62,8 @@ public class FBDResourceReloadListener extends SimpleJsonResourceReloadListener 
     public static double getFluidDensity(FluidStack fluidStack) {
         return getFluidDensity(fluidStack.getFluid());
     }
+
+    public static int getTitanBloodAmount(FluidStack fluidStack) {
+        return (int) (fluidStack.getAmount() * getFluidDensity(fluidStack));
+    }
 }

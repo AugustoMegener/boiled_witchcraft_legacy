@@ -6,15 +6,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
+import org.kitowashere.boiled_witchcraft.networking.packet.SRSBPacketC2S;
 import org.kitowashere.boiled_witchcraft.networking.packet.STGGPacketC2S;
 import org.kitowashere.boiled_witchcraft.world.blocks.entities.SprayerBlockEntity;
 
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.FLUID_HANDLER;
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER;
+import static org.kitowashere.boiled_witchcraft.data.server.FBDResourceReloadListener.getTitanBloodAmount;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPRAYER;
 import static org.kitowashere.boiled_witchcraft.registry.MenuTypeRegistry.SPRAYER_MENU;
 
@@ -37,7 +41,7 @@ public class SprayerMenu extends AbstractContainerMenu {
         super(SPRAYER_MENU.get(), pContainerId);
         this.blockEntity = blockEntity;
 
-        checkContainerDataCount(data, 1);
+        checkContainerDataCount(data, 2);
         this.data = data;
 
         Level level = blockEntity.getLevel();
@@ -87,7 +91,24 @@ public class SprayerMenu extends AbstractContainerMenu {
         }
     }
 
+    public void setRange(int range) {
+        data.set(1, range);
+        ModMessages.sendToServer(new SRSBPacketC2S((Level) levelAccess, blockEntity.getBlockPos(), range));
+    }
+
+    public int getBloodAmount() {
+        LazyOptional<IFluidHandler> fluid = blockEntity.getCapability(FLUID_HANDLER);
+
+        if (fluid.isPresent()) {
+            return getTitanBloodAmount(fluid.orElse(null).getFluidInTank(0));
+        } else return 0;
+    }
+
     public int getCooldownTime() {
         return data.get(0);
+    }
+
+    public void nextCooldownTick() {
+        data.set(0, data.get(0) - 1);
     }
 }

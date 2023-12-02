@@ -1,8 +1,6 @@
 package org.kitowashere.boiled_witchcraft.event;
 
-import net.minecraft.commands.Commands;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +9,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
+
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,7 +20,6 @@ import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 import org.kitowashere.boiled_witchcraft.networking.packet.BDCPacketS2C;
 import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacketS2C;
 import org.kitowashere.boiled_witchcraft.core.blood.BloodDensityProvider;
-import org.kitowashere.boiled_witchcraft.server.commands.TitanBloodCommand;
 import org.kitowashere.boiled_witchcraft.world.items.Pencil;
 import org.kitowashere.boiled_witchcraft.world.player.capabilities.gctx.PlayerGCTXProvider;
 
@@ -95,10 +92,5 @@ public class ModEvent {
     @SubscribeEvent
     public static void onAddReloadListener(AddReloadListenerEvent event) {
         event.addListener(new FBDResourceReloadListener());
-    }
-
-    @SubscribeEvent
-    public static void registerCommands(RegisterCommandsEvent event) {
-        new TitanBloodCommand(event.getDispatcher());
     }
 }
