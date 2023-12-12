@@ -17,7 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.kitowashere.boiled_witchcraft.client.gui.overlay.GlyphSelector;
 import org.kitowashere.boiled_witchcraft.client.gui.overlay.PaperInfo;
 import org.kitowashere.boiled_witchcraft.client.gui.overlay.TitanBloodTokens;
-import org.kitowashere.boiled_witchcraft.client.gui.screen.SprayerScreen;
+import org.kitowashere.boiled_witchcraft.client.gui.screen.sprayer.SprayerScreen;
 import org.kitowashere.boiled_witchcraft.client.models.ThrowableMagicModel;
 import org.kitowashere.boiled_witchcraft.client.renderer.ThrowableMagicRenderer;
 

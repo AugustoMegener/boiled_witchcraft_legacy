@@ -32,14 +32,15 @@ import static net.minecraft.world.item.Items.BUCKET;
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER;
 import static net.minecraftforge.fluids.FluidType.BUCKET_VOLUME;
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
+import static org.kitowashere.boiled_witchcraft.data.server.FBDResourceReloadListener.getFluidAmount;
 import static org.kitowashere.boiled_witchcraft.data.server.FBDResourceReloadListener.getFluidDensity;
 import static org.kitowashere.boiled_witchcraft.registry.BlockEntityRegistry.SPRAYER_BLOCK_ENTITY;
 import static org.kitowashere.boiled_witchcraft.core.blood.BloodDensityProvider.TITAN_BLOOD_HANDLER;
 
 public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuProvider {
 
-    private int cooldown;
-    private int range;
+    private int coolDown;
+    private int range = 1;
 
     public ItemStackHandler bucketSlot = new ItemStackHandler() {
         @Override
@@ -52,6 +53,8 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
                     tank.fill(new FluidStack(bucket.getFluid(), BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE) > 0
                 ) setStackInSlot(0, new ItemStack(BUCKET));
             }
+
+            setChanged();
         }
     };
 
@@ -59,8 +62,8 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
         @Override
         public int get(int pIndex) {
             return switch (pIndex) {
-                case 0 -> cooldown;
-                case 1 -> range;
+                case 0 -> coolDown;
+                case 1 -> Math.max(range, 1);
                 default -> 0;
             };
         }
@@ -68,17 +71,27 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
         @Override
         public void set(int pIndex, int pValue) {
             switch (pIndex) {
-                case 0 -> cooldown = pValue;
-                case 1 -> range = pValue;
+                case 0 -> coolDown = pValue;
+                case 1 -> range = Math.max(pValue, 1);
                 default -> {}
             }
+
+            setChanged();
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
+
+    private int getBloodAmount() {
+        return (int) (tank.getFluidAmount() * getFluidDensity(tank.getFluid()));
+    }
+
+    private int getBloodPerChunk() {
+        return getBloodAmount() / range ^ 2;
+    }
 
     public SprayerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(SPRAYER_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -119,7 +132,7 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
     }
 
     public boolean canSpray() {
-        return tank.getFluidAmount() >= BUCKET_VOLUME;
+        return getBloodPerChunk() > 0;
     }
 
     public void spray() {
@@ -127,21 +140,24 @@ public class SprayerBlockEntity extends FluidHandlerBlockEntity implements MenuP
             LazyOptional<ITitanBloodHandler> capability =
                 level.getChunkAt(getBlockPos()).getCapability(TITAN_BLOOD_HANDLER);
 
-            capability.ifPresent(handler -> {
-                handler.add((int) (tank.getFluidAmount() * getFluidDensity(tank.getFluid())));
-                tank.drain(tank.getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
-            });
+            capability.ifPresent(handler -> handler.add(
+                tank.drain(
+                    getFluidAmount(getBloodPerChunk(), tank.getFluid()),
+                    IFluidHandler.FluidAction.EXECUTE
+                ).getAmount()
+            ));
         }
 
         if (level.isClientSide) { ModMessages.sendToServer(new STGGPacketC2S(level, getBlockPos())); }
     }
 
-
     public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState state, T be) {
         if (be instanceof SprayerBlockEntity sprayer) {
             ContainerData data = sprayer.data;
 
-            if (data.get(0) > 0) data.set(0, data.get(0) - 1);
+            if (data.get(0) > 0) {
+                data.set(0, data.get(0) - 1);
+            }
         }
     }
 

@@ -6,10 +6,7 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import org.kitowashere.boiled_witchcraft.networking.packet.BDCPacketS2C;
-import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacketC2S;
-import org.kitowashere.boiled_witchcraft.networking.packet.GCTXPacketS2C;
-import org.kitowashere.boiled_witchcraft.networking.packet.STGGPacketC2S;
+import org.kitowashere.boiled_witchcraft.networking.packet.*;
 
 import static org.kitowashere.boiled_witchcraft.BoiledWitchcraft.MODID;
 
@@ -53,6 +50,12 @@ public class ModMessages {
                 .decoder(STGGPacketC2S::new)
                 .encoder(STGGPacketC2S::toBytes)
                 .consumerMainThread(STGGPacketC2S::handle)
+                .add();
+
+        net.messageBuilder(SRSBPacketC2S.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(SRSBPacketC2S::new)
+                .encoder(SRSBPacketC2S::toBytes)
+                .consumerMainThread(SRSBPacketC2S::handle)
                 .add();
     }
 

@@ -17,11 +17,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class FluidDisplayWidget extends AbstractWidget {
+public class FluidTankWidget extends AbstractWidget {
 
     private final IFluidHandler iFluidHandler;
 
-    public FluidDisplayWidget(int pX, int pY, int pWidth, int pHeight, IFluidHandler blockEntity) {
+    public FluidTankWidget(int pX, int pY, int pWidth, int pHeight, IFluidHandler blockEntity) {
         super(pX, pY, pWidth, pHeight, Component.empty()); this.iFluidHandler = blockEntity;
     }
 

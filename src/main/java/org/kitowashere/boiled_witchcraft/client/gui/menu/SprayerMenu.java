@@ -6,23 +6,25 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.kitowashere.boiled_witchcraft.networking.ModMessages;
 import org.kitowashere.boiled_witchcraft.networking.packet.SRSBPacketC2S;
-import org.kitowashere.boiled_witchcraft.networking.packet.STGGPacketC2S;
 import org.kitowashere.boiled_witchcraft.world.blocks.entities.SprayerBlockEntity;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.FLUID_HANDLER;
 import static net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER;
-import static org.kitowashere.boiled_witchcraft.data.server.FBDResourceReloadListener.getTitanBloodAmount;
+import static org.kitowashere.boiled_witchcraft.data.server.FBDResourceReloadListener.getFluidDensity;
 import static org.kitowashere.boiled_witchcraft.registry.BlockRegistry.SPRAYER;
 import static org.kitowashere.boiled_witchcraft.registry.MenuTypeRegistry.SPRAYER_MENU;
 
 public class SprayerMenu extends AbstractContainerMenu {
+
+    public static final int MAX_RANGE = 9;
 
     public static final int COOLDOWN_TIME = 100;
 
@@ -35,8 +37,12 @@ public class SprayerMenu extends AbstractContainerMenu {
     public IFluidHandler tankHandler;
 
     public SprayerMenu(int pContainerId, Inventory inv, @NotNull FriendlyByteBuf buf) {
-        this(pContainerId, inv, (SprayerBlockEntity) inv.player.level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
+        this(
+            pContainerId, inv, (SprayerBlockEntity) inv.player.level.getBlockEntity(buf.readBlockPos()),
+            new SimpleContainerData(2)
+        );
     }
+
     public SprayerMenu(int pContainerId, Inventory inv, SprayerBlockEntity blockEntity, ContainerData data) {
         super(SPRAYER_MENU.get(), pContainerId);
         this.blockEntity = blockEntity;
@@ -56,7 +62,7 @@ public class SprayerMenu extends AbstractContainerMenu {
 
     private void createContainer(SprayerBlockEntity be) {
         be.getCapability(ITEM_HANDLER).ifPresent(iItemHandler ->
-            bucketSlot = addSlot(new SlotItemHandler(iItemHandler, 0, 44, 53))
+            bucketSlot = addSlot(new SlotItemHandler(iItemHandler, 0, 7, 61))
         );
         be.getCapability(FLUID_HANDLER).ifPresent(iFluidHandler ->
             tankHandler = iFluidHandler
@@ -84,31 +90,62 @@ public class SprayerMenu extends AbstractContainerMenu {
     }
 
     public void trySpray() {
-        if (blockEntity.canSpray() && data.get(0) <= 0) {
+        if (blockEntity.canSpray() && data.get(0) > 0) {
             data.set(0, COOLDOWN_TIME);
 
             blockEntity.spray();
+            clampRange();
         }
     }
 
     public void setRange(int range) {
         data.set(1, range);
-        ModMessages.sendToServer(new SRSBPacketC2S((Level) levelAccess, blockEntity.getBlockPos(), range));
+        ModMessages.sendToServer(new SRSBPacketC2S(blockEntity.getLevel(), blockEntity.getBlockPos(), range));
     }
 
-    public int getBloodAmount() {
-        LazyOptional<IFluidHandler> fluid = blockEntity.getCapability(FLUID_HANDLER);
-
-        if (fluid.isPresent()) {
-            return getTitanBloodAmount(fluid.orElse(null).getFluidInTank(0));
-        } else return 0;
+    public void setCoolDownTime(int time) {
+        data.set(0, time);
     }
 
-    public int getCooldownTime() {
+    public int getCoolDownTime() {
         return data.get(0);
     }
 
-    public void nextCooldownTick() {
+    public void nextCoolDownTick() {
         data.set(0, data.get(0) - 1);
+    }
+
+    public int getRange() {
+        return Math.max(data.get(1), 1);
+    }
+
+    public int getBloodAmount() {
+        AtomicReference<FluidStack> fluidStack = new AtomicReference<>(FluidStack.EMPTY);
+
+        blockEntity.getCapability(FLUID_HANDLER).ifPresent(
+            iFluidHandler -> fluidStack.set(iFluidHandler.getFluidInTank(0))
+        );
+
+        return (int) (fluidStack.get().getAmount() * getFluidDensity(fluidStack.get()));
+    }
+
+    public void clampRange() {
+        int side = (int) Math.sqrt(getBloodAmount());
+
+        data.set(1, Math.max(1, Math.min(getRange(), Math.min(MAX_RANGE, side % 2 == 0 ? side - 1 : side))));
+    }
+
+    public void nextRange() {
+        data.set(1, getRange() + 2);
+        clampRange();
+    }
+
+    public void previousRange() {
+        data.set(1, getRange() - 2);
+        clampRange();
+    }
+
+    public int bloodPerChunk() {
+        return getBloodAmount() / getRange() ^ 2;
     }
 }
